@@ -351,5 +351,246 @@ fimpara
          fimse
 
       fimse
+// ==================================================
+      // US5 - IDENTIFICAR AS FALTAS
+      // ==================================================
 
+      se (turno = 1) entao
+
+         se (clinicoManha < 2) entao
+            faltaClinicoManha <- 2 - clinicoManha
+         senao
+            faltaClinicoManha <- 0
+         fimse
+
+         se (pediatraManha < 1) entao
+            faltaPediatraManha <- 1 - pediatraManha
+         senao
+            faltaPediatraManha <- 0
+         fimse
+
+         se (cirurgiaoManha < 1) entao
+            faltaCirurgiaoManha <- 1 - cirurgiaoManha
+         senao
+            faltaCirurgiaoManha <- 0
+         fimse
+
+
+      senao
+
+         se (turno = 2) entao
+
+            se (clinicoTarde < 2) entao
+               faltaClinicoTarde <- 2 - clinicoTarde
+            senao
+               faltaClinicoTarde <- 0
+            fimse
+
+            se (pediatraTarde < 1) entao
+               faltaPediatraTarde <- 1 - pediatraTarde
+            senao
+               faltaPediatraTarde <- 0
+            fimse
+
+            se (cirurgiaoTarde < 1) entao
+               faltaCirurgiaoTarde <- 1 - cirurgiaoTarde
+            senao
+               faltaCirurgiaoTarde <- 0
+            fimse
+
+
+         senao
+
+            se (turno = 3) entao
+
+               se (clinicoNoite < 2) entao
+                  faltaClinicoNoite <- 2 - clinicoNoite
+               senao
+                  faltaClinicoNoite <- 0
+               fimse
+
+               se (pediatraNoite < 1) entao
+                  faltaPediatraNoite <- 1 - pediatraNoite
+               senao
+                  faltaPediatraNoite <- 0
+               fimse
+
+               se (cirurgiaoNoite < 1) entao
+                  faltaCirurgiaoNoite <- 1 - cirurgiaoNoite
+               senao
+                  faltaCirurgiaoNoite <- 0
+               fimse
+
+            fimse
+
+         fimse
+
+      fimse
+
+
+      // ==================================================
+      // US6 - RESULTADO DA ANÁLISE
+      // ==================================================
+
+      se (turno = 1) entao
+
+         se (publicarManha = falso) entao
+            respostaManha <- "Não pode ser publicado!!!"
+         senao
+            respostaManha <- "Pode ser publicado!!!"
+         fimse
+
+
+      senao
+
+         se (turno = 2) entao
+
+            se (publicarTarde = falso) entao
+               respostaTarde <- "Não pode ser publicado!!!"
+            senao
+               respostaTarde <- "Pode ser publicado!!!"
+            fimse
+
+
+         senao
+
+            se (turno = 3) entao
+
+               se (publicarNoite = falso) entao
+                  respostaNoite <- "Não pode ser publicado!!!"
+               senao
+                  respostaNoite <- "Pode ser publicado!!!"
+               fimse
+
+            fimse
+
+         fimse
+
+      fimse
+
+
+      limpatela
+
+   fimpara
+
+
+   // ==================================================
+   // US6 - RESULTADO FINAL
+   // ==================================================
+
+   escreval("")
+   escreval("------------------------------------")
+   escreval("|     HOSPITAL SANTA AURORA        |")
+   escreval("------------------------------------")
+
+
+   // ==================================================
+   // US5 + US6 - RESULTADO DA MANHÃ
+   // ==================================================
+
+   escreval("")
+   escreval("TURNO DA MANHÃ")
+   escreval("Quantidade mínima:")
+   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
+   escreval("-----------------------------------------------")
+
+   escreval(respostaManha)
+
+   escreval("Quantidade de Clínicos : ", clinicoManha)
+   escreval("Quantidade de Pediatras : ", pediatraManha)
+   escreval("Quantidade de Cirurgiões : ", cirurgiaoManha)
+
+
+   se (publicarManha = falso) entao
+
+      escreval("")
+      escreval("FALTAS:")
+
+      se (faltaClinicoManha > 0) entao
+         escreval("Clínicos Gerais: faltam ", faltaClinicoManha)
+      fimse
+
+      se (faltaPediatraManha > 0) entao
+         escreval("Pediatras: faltam ", faltaPediatraManha)
+      fimse
+
+      se (faltaCirurgiaoManha > 0) entao
+         escreval("Cirurgiões: faltam ", faltaCirurgiaoManha)
+      fimse
+
+   fimse
+
+
+   // ==================================================
+   // US5 + US6 - RESULTADO DA TARDE
+   // ==================================================
+
+   escreval("")
+   escreval("TURNO DA TARDE")
+   escreval("Quantidade mínima:")
+   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
+   escreval("-----------------------------------------------")
+
+   escreval(respostaTarde)
+
+   escreval("Quantidade de Clínicos : ", clinicoTarde)
+   escreval("Quantidade de Pediatras : ", pediatraTarde)
+   escreval("Quantidade de Cirurgiões : ", cirurgiaoTarde)
+
+
+   se (publicarTarde = falso) entao
+
+      escreval("")
+      escreval("FALTAS:")
+
+      se (faltaClinicoTarde > 0) entao
+         escreval("Clínicos Gerais: faltam ", faltaClinicoTarde)
+      fimse
+
+      se (faltaPediatraTarde > 0) entao
+         escreval("Pediatras: faltam ", faltaPediatraTarde)
+      fimse
+
+      se (faltaCirurgiaoTarde > 0) entao
+         escreval("Cirurgiões: faltam ", faltaCirurgiaoTarde)
+      fimse
+
+   fimse
+
+
+   // ==================================================
+   // US5 + US6 - RESULTADO DA NOITE
+   // ==================================================
+
+   escreval("")
+   escreval("TURNO DA NOITE")
+   escreval("Quantidade mínima:")
+   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
+   escreval("-----------------------------------------------")
+
+   escreval(respostaNoite)
+
+   escreval("Quantidade de Clínicos : ", clinicoNoite)
+   escreval("Quantidade de Pediatras : ", pediatraNoite)
+   escreval("Quantidade de Cirurgiões : ", cirurgiaoNoite)
+
+
+   se (publicarNoite = falso) entao
+
+      escreval("")
+      escreval("FALTAS:")
+
+      se (faltaClinicoNoite > 0) entao
+         escreval("Clínicos Gerais: faltam ", faltaClinicoNoite)
+      fimse
+
+      se (faltaPediatraNoite > 0) entao
+         escreval("Pediatras: faltam ", faltaPediatraNoite)
+      fimse
+
+      se (faltaCirurgiaoNoite > 0) entao
+         escreval("Cirurgiões: faltam ", faltaCirurgiaoNoite)
+      fimse
+
+   fimse
 fimalgoritmo
