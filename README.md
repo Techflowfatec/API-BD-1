@@ -62,8 +62,8 @@ Transformar o processo manual em um sistema que:
 | 3 | Como coordenador de escala, quero que o sistema valide os dados informados, para evitar opções inválidas ou quantidades impossíveis. | Alta | 1 |
 | 4 | Como coordenador de escala, quero que o sistema verifique a cobertura mínima do plantão, para saber se todas as especialidades possuem profissionais suficientes. | Alta | 1 |
 | 5 | Como coordenador de escala, quero saber qual especialidade está com falta de profissionais e quantos faltam, para poder corrigir o plantão. | Alta | 1 |
-| 6 | Como coordenador de escala, quero receber o resultado da análise do plantão, para saber se ele pode ou não ser publicado. | Alta | 1 |
-| 7 | Como coordenador de escala, quero analisar mais de um plantão, para acompanhar a cobertura de diferentes turnos. | Alta | 2 |
+| 6 | Como coordenador de escala, quero receber o resultado da análise do plantão, para saber se ele pode ou não ser publicado. | Alta| 1 |
+| 7 | Como coordenador de escala, quero analisar mais de um plantão, para acompanhar a cobertura de diferentes turnos. | Média | 2 |
 | 8 | Como coordenador de escala, quero cadastrar médicos com nome e especialidade, para identificar quem está alocado em cada plantão. | — | 3 |
 | 9 | Como coordenador de escala, quero montar um plantão com médicos específicos, para saber exatamente quem trabalhará em cada turno. | — | 3 |
 
