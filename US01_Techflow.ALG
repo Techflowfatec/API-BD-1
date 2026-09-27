@@ -25,7 +25,7 @@ noite <- 0
 
 
 // ==================================================
-// US1 - ESCOLHER O TURNO DO PLANT√O
+// US1 - ESCOLHER O TURNO DO PLANT√ÉO
 // ==================================================
 
 para i de 1 ate 3 faca
@@ -34,12 +34,12 @@ escreval("------------------------------------")
 escreval("| HOSPITAL SANTA AURORA |")
 escreval("------------------------------------")
 escreval("Digite o turno que deseja:")
-escreval("1 - Manh„ | 2 - Tarde | 3 - Noite")
+escreval("1 - Manh√£ | 2 - Tarde | 3 - Noite")
 leia(turno)
 
 
 // ==================================================
-// VALIDA«√O DO TURNO
+// VALIDA√á√ÉO DO TURNO
 // ==================================================
 
 para iTurno de 1 ate 10 faca
@@ -47,31 +47,31 @@ para iTurno de 1 ate 10 faca
 se (turno < 1) ou (turno > 3) entao
 
 escreval("TURNO INEXISTENTE!!! Tentativa", iTurno , "/10")
-escreval("Digite um n˙mero entre 1 e 3")
+escreval("Digite um n√∫mero entre 1 e 3")
 leia(turno)
 
 senao
 
 se (turno = 1) e (manha = 1) entao
 
-escreval("TURNO J¡ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-escreval("Escolha um turno ainda n„o selecionado")
+escreval("TURNO J√Å ESCOLHIDO!!! Tentativa", iTurno , "/10")
+escreval("Escolha um turno ainda n√£o selecionado")
 leia(turno)
 
 senao
 
 se (turno = 2) e (tarde = 1) entao
 
-escreval("TURNO J¡ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-escreval("Escolha um turno ainda n„o selecionado")
+escreval("TURNO J√Å ESCOLHIDO!!! Tentativa", iTurno , "/10")
+escreval("Escolha um turno ainda n√£o selecionado")
 leia(turno)
 
 senao
 
 se (turno = 3) e (noite = 1) entao
 
-escreval("TURNO J¡ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-escreval("Escolha um turno ainda n„o selecionado")
+escreval("TURNO J√Å ESCOLHIDO!!! Tentativa", iTurno , "/10")
+escreval("Escolha um turno ainda n√£o selecionado")
 leia(turno)
 
 fimse
@@ -86,7 +86,7 @@ fimpara
 
 
 // ==================================================
-// US2 - INFORMAR QUANTIDADE DE M…DICOS
+// US2 - INFORMAR QUANTIDADE DE M√âDICOS
 // ==================================================
 
 se (turno = 1) entao
@@ -94,15 +94,15 @@ se (turno = 1) entao
 manha <- 1
 
 escreval("")
-escreval("TURNO DA MANH√")
+escreval("TURNO DA MANH√É")
 
-escreval("Digite a quantidade de ClÌnicos Gerais:")
+escreval("Digite a quantidade de Cl√≠nicos Gerais:")
 leia(clinicoManha)
 
 escreval("Digite a quantidade de Pediatras:")
 leia(pediatraManha)
 
-escreval("Digite a quantidade de Cirurgiıes:")
+escreval("Digite a quantidade de Cirurgi√µes:")
 leia(cirurgiaoManha)
 
 
@@ -115,13 +115,13 @@ tarde <- 1
 escreval("")
 escreval("TURNO DA TARDE")
 
-escreval("Digite a quantidade de ClÌnicos Gerais:")
+escreval("Digite a quantidade de Cl√≠nicos Gerais:")
 leia(clinicoTarde)
 
 escreval("Digite a quantidade de Pediatras:")
 leia(pediatraTarde)
 
-escreval("Digite a quantidade de Cirurgiıes:")
+escreval("Digite a quantidade de Cirurgi√µes:")
 leia(cirurgiaoTarde)
 
 
@@ -134,13 +134,13 @@ noite <- 1
 escreval("")
 escreval("TURNO DA NOITE")
 
-escreval("Digite a quantidade de ClÌnicos Gerais:")
+escreval("Digite a quantidade de Cl√≠nicos Gerais:")
 leia(clinicoNoite)
 
 escreval("Digite a quantidade de Pediatras:")
 leia(pediatraNoite)
 
-escreval("Digite a quantidade de Cirurgiıes:")
+escreval("Digite a quantidade de Cirurgi√µes:")
 leia(cirurgiaoNoite)
 
 fimse
@@ -151,7 +151,7 @@ fimse
 
 
 // ==================================================
-// US3 - VALIDAR QUANTIDADE DE M…DICOS
+// US3 - VALIDAR QUANTIDADE DE M√âDICOS
 // ==================================================
 
 se (turno = 1) entao
@@ -160,8 +160,8 @@ para iManha de 1 ate 10 faca
 
 se (clinicoManha < 0) ou (clinicoManha > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iManha , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iManha , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(clinicoManha)
 
 fimse
@@ -173,8 +173,8 @@ para iManha de 1 ate 10 faca
 
 se (pediatraManha < 0) ou (pediatraManha > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iManha , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iManha , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(pediatraManha)
 
 fimse
@@ -186,8 +186,8 @@ para iManha de 1 ate 10 faca
 
 se (cirurgiaoManha < 0) ou (cirurgiaoManha > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iManha , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iManha , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(cirurgiaoManha)
 
 fimse
@@ -203,8 +203,8 @@ para iTarde de 1 ate 10 faca
 
 se (clinicoTarde < 0) ou (clinicoTarde > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iTarde , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iTarde , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(clinicoTarde)
 
 fimse
@@ -216,8 +216,8 @@ para iTarde de 1 ate 10 faca
 
 se (pediatraTarde < 0) ou (pediatraTarde > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iTarde , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iTarde , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(pediatraTarde)
 
 fimse
@@ -229,8 +229,8 @@ para iTarde de 1 ate 10 faca
 
 se (cirurgiaoTarde < 0) ou (cirurgiaoTarde > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iTarde , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iTarde , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(cirurgiaoTarde)
 
 fimse
@@ -246,8 +246,8 @@ para iNoite de 1 ate 10 faca
 
 se (clinicoNoite < 0) ou (clinicoNoite > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iNoite , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iNoite , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(clinicoNoite)
 
 fimse
@@ -259,8 +259,8 @@ para iNoite de 1 ate 10 faca
 
 se (pediatraNoite < 0) ou (pediatraNoite > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iNoite , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iNoite , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(pediatraNoite)
 
 fimse
@@ -272,8 +272,8 @@ para iNoite de 1 ate 10 faca
 
 se (cirurgiaoNoite < 0) ou (cirurgiaoNoite > 10) entao
 
-escreval("QUANTIDADE INV¡LIDA!!! Tentativa", iNoite , "/10")
-escreval("Digite um n˙mero entre 0 e 10:")
+escreval("QUANTIDADE INV√ÅLIDA!!! Tentativa", iNoite , "/10")
+escreval("Digite um n√∫mero entre 0 e 10:")
 leia(cirurgiaoNoite)
 
 fimse
@@ -287,4 +287,68 @@ fimse
 fimse
 
 fimpara
+
+      // ==========================================
+      // US4 - VERIFICAR COBERTURA M√çNIMA
+      // ==========================================
+
+      se (turno = 1) entao
+
+         publicarManha <- verdadeiro
+
+         se (clinicoManha < 2) entao
+            publicarManha <- falso
+         fimse
+
+         se (pediatraManha < 1) entao
+            publicarManha <- falso
+         fimse
+
+         se (cirurgiaoManha < 1) entao
+            publicarManha <- falso
+         fimse
+
+
+      senao
+
+         se (turno = 2) entao
+
+            publicarTarde <- verdadeiro
+
+            se (clinicoTarde < 2) entao
+               publicarTarde <- falso
+            fimse
+
+            se (pediatraTarde < 1) entao
+               publicarTarde <- falso
+            fimse
+
+            se (cirurgiaoTarde < 1) entao
+               publicarTarde <- falso
+            fimse
+
+
+         senao
+
+            se (turno = 3) entao
+
+               publicarNoite <- verdadeiro
+
+               se (clinicoNoite < 2) entao
+                  publicarNoite <- falso
+               fimse
+
+               se (pediatraNoite < 1) entao
+                  publicarNoite <- falso
+               fimse
+
+               se (cirurgiaoNoite < 1) entao
+                  publicarNoite <- falso
+               fimse
+
+            fimse
+
+         fimse
+
+      fimse
 fimalgoritmo
