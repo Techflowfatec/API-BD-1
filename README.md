@@ -132,3 +132,32 @@ Transformar o processo manual em um sistema que:
 ## 📂 Estrutura do Repositório
 
 
+---
+
+## 👥 Equipe TechFlow
+
+| Nome | Função |
+|---|---|
+| *(insira nome)* | Product Owner |
+| *(insira nome)* | Scrum Master |
+| *(insira nome)* | Desenvolvedor |
+| *(insira nome)* | Desenvolvedor |
+| *(insira nome)* | Desenvolvedor |
+
+---
+
+## 📌 Status do Projeto
+
+| Fase | Status |
+|---|---|
+| Sprint 1 | Finalizada |
+| Sprint 2 | ⏳ Planejada |
+| Sprint 3 | ⏳ Planejada |
+
+---
+
+<p align="center"><strong>TechFlow</strong><br>
+<em>API Inteligente. Soluções que Fluem.</em></p>
+
+
+
