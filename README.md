@@ -22,10 +22,10 @@
 
 O **MedShift** é um sistema desenvolvido para apoiar a coordenação do **Hospital Santa Aurora** na organização e validação de escalas médicas de plantão. Atualmente, a conferência é feita de forma manual, consumindo tempo e propensa a erros.
 
-O sistema **não apenas registra nomes** — ele responde:
+O sistema responde de forma direta:
 - ✅ Pode publicar o plantão?
 - ❌ Se não pode, **qual especialidade está faltando e quantos profissionais faltam**?
-- ⚠️ Os dados digitados fazem sentido?
+- ⚠️ Os dados digitados são válidos?
 
 ---
 
@@ -41,12 +41,13 @@ Transformar o processo manual em um sistema que:
 
 ## 📊 Regras de Cobertura Mínima
 
-| Especialidade | Manhã | Tarde | Noite |
-|---|---|---|---|
-| Clínico Geral | 2 | 2 | 2 |
-| Pediatra | 1 | 1 | 1 |
-| Cirurgião | 1 | 1 | 1 |
+| Especialidade | Mínimo por Turno |
+|---|---|
+| Clínico Geral | 2 |
+| Pediatra | 1 |
+| Cirurgião | 1 |
 
+- Turnos disponíveis: **Manhã, Tarde e Noite**
 - Plantão abaixo da cobertura mínima **não pode ser publicado**
 - O sistema deve informar **qual especialidade** e **quantos profissionais faltam**
 
@@ -56,19 +57,15 @@ Transformar o processo manual em um sistema que:
 
 | ID | User Story | Prioridade | Sprint |
 |---|---|---|---|
-| US01 | Como coordenador, quero escolher o turno do plantão, para analisar a cobertura | Alta | 1 |
-| US02 | Como coordenador, quero informar a quantidade de médicos por especialidade, para verificar suficiência | Alta | 1 |
-| US03 | Como coordenador, quero validação automática dos dados, para evitar entradas inválidas | Alta | 1 |
-| US04 | Como coordenador, quero verificação da cobertura mínima, para saber se há profissionais suficientes | Alta | 1 |
-| US05 | Como coordenador, quero saber qual especialidade está faltando e quantos faltam, para corrigir | Alta | 1 |
-| US06 | Como coordenador, quero receber mensagem clara se pode publicar, para decidir rápido | Alta | 1 |
-| US07 | Como coordenador, quero que quantidades negativas sejam rejeitadas, para impedir dados impossíveis | Alta | 1 |
-| US08 | Como coordenador, quero limite máximo de profissionais por especialidade, para evitar erros de digitação | Média | 1 |
-| US09 | Como coordenador, quero selecionar apenas turnos válidos, para evitar operações incorretas | Média | 1 |
-| US10 | Como coordenador, quero usar pelo teclado/console, sem depender de interface gráfica | Média | 1 |
-| US11 | Analisar múltiplos plantões | Alta | 2 |
-| US12 | Cadastrar médicos com nome e especialidade | — | 3 |
-| US13 | Montar plantão com profissionais específicos | — | 3 |
+| 1 | Como coordenador de escala, quero escolher o turno do plantão, para que eu possa analisar a cobertura daquele turno. | Alta | 1 |
+| 2 | Como coordenador de escala, quero informar a quantidade de médicos de cada especialidade no turno, para verificar se há profissionais suficientes. | Alta | 1 |
+| 3 | Como coordenador de escala, quero que o sistema valide os dados informados, para evitar opções inválidas ou quantidades impossíveis. | Alta | 1 |
+| 4 | Como coordenador de escala, quero que o sistema verifique a cobertura mínima do plantão, para saber se todas as especialidades possuem profissionais suficientes. | Alta | 1 |
+| 5 | Como coordenador de escala, quero saber qual especialidade está com falta de profissionais e quantos faltam, para poder corrigir o plantão. | Alta | 1 |
+| 6 | Como coordenador de escala, quero receber o resultado da análise do plantão, para saber se ele pode ou não ser publicado. | Alta | 1 |
+| 7 | Como coordenador de escala, quero analisar mais de um plantão, para acompanhar a cobertura de diferentes turnos. | Alta | 2 |
+| 8 | Como coordenador de escala, quero cadastrar médicos com nome e especialidade, para identificar quem está alocado em cada plantão. | — | 3 |
+| 9 | Como coordenador de escala, quero montar um plantão com médicos específicos, para saber exatamente quem trabalhará em cada turno. | — | 3 |
 
 ---
 
@@ -81,7 +78,7 @@ Transformar o processo manual em um sistema que:
 | **Git / GitHub** | Controle de versão e documentação |
 | **Console / Texto** | Interface de interação com o usuário |
 
-> ⚠️ **Restrições do VisuAlg**:
+> ⚠️ Restrições do VisuAlg:
 > - Sem tipo registro → usa vetores paralelos
 > - Sem gravação de arquivos → dados não persistem entre execuções
 > - Vetores de até 2 dimensões
@@ -99,30 +96,30 @@ Transformar o processo manual em um sistema que:
 2. Execute o programa (▶️)
 3. Siga as instruções no console:
    - Escolha o turno: `1-Manhã | 2-Tarde | 3-Noite`
-   - Informe a quantidade de cada especialidade
+   - Informe a quantidade de cada especialidade (limite: 0 a 10)
    - Receba o diagnóstico: ✅ Pode publicar ou ❌ Motivo da reprovação
 
 ### Cenários de Teste
 | Cenário | Resultado Esperado |
 |---|---|
 | Todos mínimos atingidos | ✅ Pode publicar |
-| Faltando 1 Pediatra | ❌ Não pode — Faltam 1 Pediatra |
-| Quantidade negativa | ⚠️ Erro — Valor inválido |
-| Turno 4 | ⚠️ Erro — Opção inválida |
-| Valor > 10 | ⚠️ Erro — Valor acima do limite |
+| Faltando 1 Pediatra | ❌ Não pode — faltam 1 Pediatra |
+| Quantidade negativa | ⚠️ Erro — valor inválido |
+| Turno 4 | ⚠️ Erro — opção inválida |
+| Valor > 10 | ⚠️ Erro — valor acima do limite |
 
 ---
 
 ## ✅ Definições de Pronto
 
-### DoR — Definition of Ready
+### DoR — Pronto para Iniciar
 - [ ] User story clara e compreendida pela equipe
 - [ ] Critérios de aceite definidos
 - [ ] Cenários de sucesso e erro mapeados
 - [ ] Esforço estimado
 - [ ] Sem impedimentos para iniciar
 
-### DoD — Definition of Done
+### DoD — Pronto para Entregar
 - [ ] Código implementado no VisuAlg
 - [ ] Passa em todos os cenários de teste
 - [ ] Mensagens claras para o usuário
@@ -133,4 +130,5 @@ Transformar o processo manual em um sistema que:
 ---
 
 ## 📂 Estrutura do Repositório
+
 
