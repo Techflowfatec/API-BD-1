@@ -138,11 +138,12 @@ Transformar o processo manual em um sistema que:
 
 | Nome | Função |
 |---|---|
-| *(insira nome)* | Product Owner |
-| *(insira nome)* | Scrum Master |
-| *(insira nome)* | Desenvolvedor |
-| *(insira nome)* | Desenvolvedor |
-| *(insira nome)* | Desenvolvedor |
+| *(Bruno Amaral)* | Product Owner |
+| *(Amanda Mesquita)* | Scrum Master |
+| *(Ana Clara)* | Desenvolvedor |
+| *(Guilherme)* | Desenvolvedor |
+| *(Pedro Rosa)* | Desenvolvedor |
+| *(Pedro Albino)* | Desenvolvedor |
 
 ---
 
