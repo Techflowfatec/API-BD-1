@@ -140,8 +140,8 @@ Transformar o processo manual em um sistema que:
 |---|---|
 | *Bruno Amaral* | Product Owner |
 | *Amanda Mesquita* | Scrum Master |
-| *Ana Clara* | Desenvolvedor |
-| *Guilherme* | Desenvolvedor |
+| *Ana Clara Brito* | Desenvolvedor |
+| *Guilherme Ribeiro* | Desenvolvedor |
 | *Pedro Rosa* | Desenvolvedor |
 | *Pedro Albino* | Desenvolvedor |
 
