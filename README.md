@@ -144,6 +144,7 @@ Transformar o processo manual em um sistema que:
 | *Guilherme Ribeiro* | Desenvolvedor |
 | *Pedro Rosa* | Desenvolvedor |
 | *Pedro Albino* | Desenvolvedor |
+| *Karina Fernanda* | Desenvolvedor |
 
 ---
 
