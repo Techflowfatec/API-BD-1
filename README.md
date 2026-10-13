@@ -63,9 +63,13 @@ Transformar o processo manual em um sistema que:
 | 4 | Como coordenador de escala, quero que o sistema verifique a cobertura mínima do plantão, para saber se todas as especialidades possuem profissionais suficientes. | Alta | 1 |
 | 5 | Como coordenador de escala, quero saber qual especialidade está com falta de profissionais e quantos faltam, para poder corrigir o plantão. | Alta | 1 |
 | 6 | Como coordenador de escala, quero receber o resultado da análise do plantão, para saber se ele pode ou não ser publicado. | Alta| 1 |
-| 7 | Como coordenador de escala, quero analisar mais de um plantão, para acompanhar a cobertura de diferentes turnos. | Média | 2 |
-| 8 | Como coordenador de escala, quero cadastrar médicos com nome e especialidade, para identificar quem está alocado em cada plantão. | — | 3 |
-| 9 | Como coordenador de escala, quero montar um plantão com médicos específicos, para saber exatamente quem trabalhará em cada turno. | — | 3 |
+| 7 |Como coordenador de escala, quero cadastrar um profissional, para manter a base de médicos atualizada para a montagem dos plantões. | Média | 2 |
+| 8 | Como coordenador de escala, quero atribuir um médico cadastrado a um turno específico do dia, para preencher as vagas do plantão. | Média | 2 |
+| 9 | Como coordenador de escala, quero consultar um profissional, para visualizar seus dados de cadastro. | Média | 2 |
+| 10 | Como coordenador de escala, quero impedir que um médico seja escalado em uma especialidade diferente da cadastrada, para garantir que cada profissional atue em sua especialidade. | Média | 2 |
+| 11 |Como coordenador de escala, quero impedir que um médico tenha mais de dois plantões no mesmo dia, para respeitar o limite estabelecido para a escala. | Média | 2 |
+| 12 |Como coordenador de escala, quero visualizar um resumo do dia, para conferir a escala e a cobertura dos três turnos. | Média | 2 |
+| 13 | Como coordenador de escala, quero visualizar a lista de todos os profissionais cadastrados, para ter uma visão geral da equipe médica disponível. | Média | 2 |
 
 ---
 
