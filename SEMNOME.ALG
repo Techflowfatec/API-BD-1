@@ -1,7 +1,7 @@
-Algoritmo "semnome"
+Algoritmo "sem nome"
 
 Var
-   i, iTurno, iManha, iTarde, iNoite : inteiro
+   i, iTurno : inteiro
    turno, manha, tarde, noite : inteiro
 
    clinicoManha, clinicoTarde, clinicoNoite : inteiro
@@ -15,7 +15,7 @@ Var
    publicarManha, publicarTarde, publicarNoite : logico
 
    respostaManha, respostaTarde, respostaNoite : caractere
-
+   confirmacao : caractere
 
 Inicio
 
@@ -23,74 +23,83 @@ Inicio
    tarde <- 0
    noite <- 0
 
+   publicarManha <- falso
+   publicarTarde <- falso
+   publicarNoite <- falso
+
+   clinicoManha <- 0
+   pediatraManha <- 0
+   cirurgiaoManha <- 0
+
+   clinicoTarde <- 0
+   pediatraTarde <- 0
+   cirurgiaoTarde <- 0
+
+   clinicoNoite <- 0
+   pediatraNoite <- 0
+   cirurgiaoNoite <- 0
+
+   faltaClinicoManha <- 0
+   faltaPediatraManha <- 0
+   faltaCirurgiaoManha <- 0
+
+   faltaClinicoTarde <- 0
+   faltaPediatraTarde <- 0
+   faltaCirurgiaoTarde <- 0
+
+   faltaClinicoNoite <- 0
+   faltaPediatraNoite <- 0
+   faltaCirurgiaoNoite <- 0
+
+   respostaManha <- "Nao analisado"
+   respostaTarde <- "Nao analisado"
+   respostaNoite <- "Nao analisado"
+
 
    // ==================================================
-   // US1 - ESCOLHER O TURNO DO PLANTÃO
+   // ESCOLHA DOS 3 TURNOS
    // ==================================================
-   // O coordenador pode escolher entre Manhã, Tarde
-   // e Noite para analisar a cobertura daquele turno.
 
    para i de 1 ate 3 faca
 
-      escreval("------------------------------------")
-      escreval("|     HOSPITAL SANTA AURORA        |")
-      escreval("------------------------------------")
-      escreval("Digite o turno que deseja:")
-      escreval("1 - Manhã  | 2 - Tarde  | 3 - Noite")
+      escreval("")
+      escreval("==========================================")
+      escreval("        HOSPITAL SANTA AURORA")
+      escreval("==========================================")
+      escreval("Escolha o turno:")
+      escreval("1 - Manha")
+      escreval("2 - Tarde")
+      escreval("3 - Noite")
       leia(turno)
 
 
       // ==================================================
-      // US3 - VALIDAÇÃO DO TURNO
+      // VALIDACAO DO TURNO
       // ==================================================
-      // Verifica se o turno informado existe e se ainda
-      // não foi escolhido.
 
-      para iTurno de 1 ate 10 faca
-
+      // Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+      enquanto (turno < 1) ou (turno > 3) ou ((turno = 1) e (manha = 1)) ou ((turno = 2) e (tarde = 1)) ou ((turno = 3) e (noite = 1)) faca
          se (turno < 1) ou (turno > 3) entao
-
-            escreval("TURNO INEXISTENTE!!! Tentativa", iTurno , "/10")
-            escreval("Digite um número entre 1 e 3")
-            leia(turno)
-
+            escreval("ERRO: turno inexistente! Digite 1, 2 ou 3:")
          senao
-
             se (turno = 1) e (manha = 1) entao
-
-               escreval("TURNO JÁ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-               escreval("Escolha um turno ainda não selecionado")
-               leia(turno)
-
+               escreval("ERRO: turno da manha ja foi escolhido! Digite outro:")
             senao
-
                se (turno = 2) e (tarde = 1) entao
-
-                  escreval("TURNO JÁ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-                  escreval("Escolha um turno ainda não selecionado")
-                  leia(turno)
-
+                  escreval("ERRO: turno da tarde ja foi escolhido! Digite outro:")
                senao
-
                   se (turno = 3) e (noite = 1) entao
-
-                     escreval("TURNO JÁ ESCOLHIDO!!! Tentativa", iTurno , "/10")
-                     escreval("Escolha um turno ainda não selecionado")
-                     leia(turno)
-
+                     escreval("ERRO: turno da noite ja foi escolhido! Digite outro:")
                   fimse
-
                fimse
-
             fimse
-
          fimse
-
-      fimpara
+         leia(turno)
+      fimenquanto
 
 
       // ==================================================
-      // TURNO DA MANHÃ
+      // TURNO DA MANHA
       // ==================================================
 
       se (turno = 1) entao
@@ -98,158 +107,116 @@ Inicio
          manha <- 1
 
          escreval("")
-         escreval("TURNO DA MANHÃ")
+         escreval("==========================================")
+         escreval("             TURNO DA MANHA")
+         escreval("==========================================")
 
 
-         // ==================================================
-         // US2 - INFORMAR QUANTIDADE DE MÉDICOS
-         // ==================================================
-         // Informa a quantidade de Clínicos Gerais,
-         // Pediatras e Cirurgiões.
-
-         escreval("Digite a quantidade de Clínicos Gerais:")
+         escreval("Digite a quantidade de Clinicos Gerais:")
          leia(clinicoManha)
 
-
-         // ==================================================
-         // US3 - VALIDAÇÃO DA QUANTIDADE
-         // ==================================================
-         // Aceita somente valores inteiros de 0 a 10.
-
-         para iManha de 1 ate 10 faca
-
-            se (clinicoManha < 0) ou (clinicoManha > 10) entao
-
-               escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iManha , "/10")
-               escreval("Digite um número entre 0 e 10:")
-               leia(clinicoManha)
-
-            fimse
-
-         fimpara
+         //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+         enquanto (clinicoManha < 0) ou (clinicoManha > 10) faca
+            escreval("Quantidade invalida!")
+            escreval("Digite um valor entre 0 e 10:")
+            leia(clinicoManha)
+         fimenquanto
 
 
          escreval("Digite a quantidade de Pediatras:")
          leia(pediatraManha)
 
-
-         // US3 - VALIDAÇÃO DA QUANTIDADE DE PEDIATRAS
-
-         para iManha de 1 ate 10 faca
-
-            se (pediatraManha < 0) ou (pediatraManha > 10) entao
-
-               escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iManha , "/10")
-               escreval("Digite um número entre 0 e 10:")
-               leia(pediatraManha)
-
-            fimse
-
-         fimpara
+         // Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+         enquanto (pediatraManha < 0) ou (pediatraManha > 10) faca
+            escreval("Quantidade invalida!")
+            escreval("Digite um valor entre 0 e 10:")
+            leia(pediatraManha)
+         fimenquanto
 
 
-         escreval("Digite a quantidade de Cirurgiões:")
+         escreval("Digite a quantidade de Cirurgioes:")
          leia(cirurgiaoManha)
 
-
-         // US3 - VALIDAÇÃO DA QUANTIDADE DE CIRURGIÕES
-
-         para iManha de 1 ate 10 faca
-
-            se (cirurgiaoManha < 0) ou (cirurgiaoManha > 10) entao
-
-               escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iTurno , "/10")
-               escreval("Digite um número entre 0 e 10:")
-               leia(cirurgiaoManha)
-
-            fimse
-
-         fimpara
+         //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+         enquanto (cirurgiaoManha < 0) ou (cirurgiaoManha > 10) faca
+            escreval("Quantidade invalida!")
+            escreval("Digite um valor entre 0 e 10:")
+            leia(cirurgiaoManha)
+         fimenquanto
 
 
          // ==================================================
-         // US4 - VERIFICAR COBERTURA MÍNIMA
+         // VERIFICAR COBERTURA MINIMA
          // ==================================================
-         // Mínimo:
-         // 2 Clínicos Gerais
-         // 1 Pediatra
-         // 1 Cirurgião
 
          publicarManha <- verdadeiro
 
-
          se (clinicoManha < 2) entao
-
             publicarManha <- falso
-
          fimse
-
 
          se (pediatraManha < 1) entao
-
             publicarManha <- falso
-
          fimse
-
 
          se (cirurgiaoManha < 1) entao
-
             publicarManha <- falso
-
          fimse
 
 
          // ==================================================
-         // US5 - IDENTIFICAR AS FALTAS
+         // CALCULAR FALTAS
          // ==================================================
-         // Mostra qual especialidade está abaixo do mínimo
-         // e quantos profissionais faltam.
 
          se (clinicoManha < 2) entao
-
             faltaClinicoManha <- 2 - clinicoManha
-
          senao
-
             faltaClinicoManha <- 0
-
          fimse
-
 
          se (pediatraManha < 1) entao
-
             faltaPediatraManha <- 1 - pediatraManha
-
          senao
-
             faltaPediatraManha <- 0
-
          fimse
-
 
          se (cirurgiaoManha < 1) entao
-
             faltaCirurgiaoManha <- 1 - cirurgiaoManha
-
          senao
-
             faltaCirurgiaoManha <- 0
-
          fimse
 
 
          // ==================================================
-         // US6 - RESULTADO DA ANÁLISE
+         // TOTAL DE MEDICOS
          // ==================================================
 
-         se (publicarManha = falso) entao
+         escreval("")
+         escreval("------------------------------------------")
+         escreval("TOTAL DE MEDICOS - MANHA")
+         escreval("------------------------------------------")
+         escreval("Clinicos Gerais: ", clinicoManha)
+         escreval("Pediatras: ", pediatraManha)
+         escreval("Cirurgioes: ", cirurgiaoManha)
+         escreval("TOTAL: ", clinicoManha + pediatraManha + cirurgiaoManha)
 
-            respostaManha <- "Não pode ser publicado!!!"
 
+         // ==================================================
+         // CONFIRMAR PUBLICACAO
+         // ==================================================
+
+         escreval("")
+         escreval("Deseja publicar o turno da MANHA? (S/N)")
+         leia(confirmacao)
+
+         se (confirmacao = "S") ou (confirmacao = "s") entao
+            se publicarManha = verdadeiro entao
+               respostaManha <- "PUBLICADO COM SUCESSO"
+            senao
+               respostaManha <- "NAO PODE SER PUBLICADO - FALTAM MEDICOS"
+            fimse
          senao
-
-            respostaManha <- "Pode ser publicado!!!"
-
+            respostaManha <- "NAO SERA PUBLICADO"
          fimse
 
 
@@ -265,149 +232,116 @@ Inicio
             tarde <- 1
 
             escreval("")
-            escreval("TURNO DA TARDE")
+            escreval("==========================================")
+            escreval("             TURNO DA TARDE")
+            escreval("==========================================")
 
 
-            // ==================================================
-            // US2 - INFORMAR QUANTIDADE DE MÉDICOS
-            // ==================================================
-
-            escreval("Digite a quantidade de Clínicos Gerais:")
+            escreval("Digite a quantidade de Clinicos Gerais:")
             leia(clinicoTarde)
 
-
-            // ==================================================
-            // US3 - VALIDAÇÃO
-            // ==================================================
-
-            para iTarde de 1 ate 10 faca
-
-               se (clinicoTarde < 0) ou (clinicoTarde > 10) entao
-
-                  escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iTarde , "/10")
-                  escreval("Digite um número entre 0 e 10:")
-                  leia(clinicoTarde)
-
-               fimse
-
-            fimpara
+            // Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+            enquanto (clinicoTarde < 0) ou (clinicoTarde > 10) faca
+               escreval("Quantidade invalida!")
+               escreval("Digite um valor entre 0 e 10:")
+               leia(clinicoTarde)
+            fimenquanto
 
 
             escreval("Digite a quantidade de Pediatras:")
             leia(pediatraTarde)
 
-
-            // US3 - VALIDAÇÃO
-
-            para iTarde de 1 ate 10 faca
-
-               se (pediatraTarde < 0) ou (pediatraTarde > 10) entao
-
-                  escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iTarde , "/10")
-                  escreval("Digite um número entre 0 e 10:")
-                  leia(pediatraTarde)
-
-               fimse
-
-            fimpara
+            // Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+            enquanto (pediatraTarde < 0) ou (pediatraTarde > 10) faca
+               escreval("Quantidade invalida!")
+               escreval("Digite um valor entre 0 e 10:")
+               leia(pediatraTarde)
+            fimenquanto
 
 
-            escreval("Digite a quantidade de Cirurgiões:")
+            escreval("Digite a quantidade de Cirurgioes:")
             leia(cirurgiaoTarde)
 
-
-            // US3 - VALIDAÇÃO
-
-            para iTarde de 1 ate 10 faca
-
-               se (cirurgiaoTarde < 0) ou (cirurgiaoTarde > 10) entao
-
-                  escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iTarde , "/10")
-                  escreval("Digite um número entre 0 e 10:")
-                  leia(cirurgiaoTarde)
-
-               fimse
-
-            fimpara
+            //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+            enquanto (cirurgiaoTarde < 0) ou (cirurgiaoTarde > 10) faca
+               escreval("Quantidade invalida!")
+               escreval("Digite um valor entre 0 e 10:")
+               leia(cirurgiaoTarde)
+            fimenquanto
 
 
             // ==================================================
-            // US4 - VERIFICAR COBERTURA MÍNIMA
+            // VERIFICAR COBERTURA MINIMA
             // ==================================================
 
             publicarTarde <- verdadeiro
 
-
             se (clinicoTarde < 2) entao
-
                publicarTarde <- falso
-
             fimse
-
 
             se (pediatraTarde < 1) entao
-
                publicarTarde <- falso
-
             fimse
 
-
             se (cirurgiaoTarde < 1) entao
-
                publicarTarde <- falso
-
             fimse
 
 
             // ==================================================
-            // US5 - IDENTIFICAR AS FALTAS
+            // CALCULAR FALTAS
             // ==================================================
 
             se (clinicoTarde < 2) entao
-
                faltaClinicoTarde <- 2 - clinicoTarde
-
             senao
-
                faltaClinicoTarde <- 0
-
             fimse
-
 
             se (pediatraTarde < 1) entao
-
                faltaPediatraTarde <- 1 - pediatraTarde
-
             senao
-
                faltaPediatraTarde <- 0
-
             fimse
-
 
             se (cirurgiaoTarde < 1) entao
-
                faltaCirurgiaoTarde <- 1 - cirurgiaoTarde
-
             senao
-
                faltaCirurgiaoTarde <- 0
-
             fimse
 
 
             // ==================================================
-            // US6 - RESULTADO DA ANÁLISE
+            // TOTAL DE MEDICOS
             // ==================================================
 
-            se (publicarTarde = falso) entao
+            escreval("")
+            escreval("------------------------------------------")
+            escreval("TOTAL DE MEDICOS - TARDE")
+            escreval("------------------------------------------")
+            escreval("Clinicos Gerais: ", clinicoTarde)
+            escreval("Pediatras: ", pediatraTarde)
+            escreval("Cirurgioes: ", cirurgiaoTarde)
+            escreval("TOTAL: ", clinicoTarde + pediatraTarde + cirurgiaoTarde)
 
-               respostaTarde <- "Não pode ser publicado!!!"
 
+            // ==================================================
+            // CONFIRMAR PUBLICACAO
+            // ==================================================
+
+            escreval("")
+            escreval("Deseja publicar o turno da TARDE? (S/N)")
+            leia(confirmacao)
+
+            se (confirmacao = "S") ou (confirmacao = "s") entao
+               se publicarTarde = verdadeiro entao
+                  respostaTarde <- "PUBLICADO COM SUCESSO"
+               senao
+                  respostaTarde <- "NAO PODE SER PUBLICADO - FALTAM MEDICOS"
+               fimse
             senao
-
-               respostaTarde <- "Pode ser publicado!!!"
-
+               respostaTarde <- "NAO SERA PUBLICADO"
             fimse
 
 
@@ -423,149 +357,116 @@ Inicio
                noite <- 1
 
                escreval("")
-               escreval("TURNO DA NOITE")
+               escreval("==========================================")
+               escreval("             TURNO DA NOITE")
+               escreval("==========================================")
 
 
-               // ==================================================
-               // US2 - INFORMAR QUANTIDADE DE MÉDICOS
-               // ==================================================
-
-               escreval("Digite a quantidade de Clínicos Gerais:")
+               escreval("Digite a quantidade de Clinicos Gerais:")
                leia(clinicoNoite)
 
-
-               // ==================================================
-               // US3 - VALIDAÇÃO
-               // ==================================================
-
-               para iNoite de 1 ate 10 faca
-
-                  se (clinicoNoite < 0) ou (clinicoNoite > 10) entao
-
-                     escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iNoite , "/10")
-                     escreval("Digite um número entre 0 e 10:")
-                     leia(clinicoNoite)
-
-                  fimse
-
-               fimpara
+               //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+               enquanto (clinicoNoite < 0) ou (clinicoNoite > 10) faca
+                  escreval("Quantidade invalida!")
+                  escreval("Digite um valor entre 0 e 10:")
+                  leia(clinicoNoite)
+               fimenquanto
 
 
                escreval("Digite a quantidade de Pediatras:")
                leia(pediatraNoite)
 
-
-               // US3 - VALIDAÇÃO
-
-               para iNoite de 1 ate 10 faca
-
-                  se (pediatraNoite < 0) ou (pediatraNoite > 10) entao
-
-                     escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iNoite , "/10")
-                     escreval("Digite um número entre 0 e 10:")
-                     leia(pediatraNoite)
-
-                  fimse
-
-               fimpara
+               //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+               enquanto (pediatraNoite < 0) ou (pediatraNoite > 10) faca
+                  escreval("Quantidade invalida!")
+                  escreval("Digite um valor entre 0 e 10:")
+                  leia(pediatraNoite)
+               fimenquanto
 
 
-               escreval("Digite a quantidade de Cirurgiões:")
+               escreval("Digite a quantidade de Cirurgioes:")
                leia(cirurgiaoNoite)
 
-
-               // US3 - VALIDAÇÃO
-
-               para iNoite de 1 ate 10 faca
-
-                  se (cirurgiaoNoite < 0) ou (cirurgiaoNoite > 10) entao
-
-                     escreval("QUANTIDADE INVÁLIDA!!! Tentativa", iNoite , "/10")
-                     escreval("Digite um número entre 0 e 10:")
-                     leia(cirurgiaoNoite)
-
-                  fimse
-
-               fimpara
+               //Utilizei o Enquanto para validaÃ§Ã£o - Pedro Rosa
+               enquanto (cirurgiaoNoite < 0) ou (cirurgiaoNoite > 10) faca
+                  escreval("Quantidade invalida!")
+                  escreval("Digite um valor entre 0 e 10:")
+                  leia(cirurgiaoNoite)
+               fimenquanto
 
 
                // ==================================================
-               // US4 - VERIFICAR COBERTURA MÍNIMA
+               // VERIFICAR COBERTURA MINIMA
                // ==================================================
 
                publicarNoite <- verdadeiro
 
-
                se (clinicoNoite < 2) entao
-
                   publicarNoite <- falso
-
                fimse
-
 
                se (pediatraNoite < 1) entao
-
                   publicarNoite <- falso
-
                fimse
 
-
                se (cirurgiaoNoite < 1) entao
-
                   publicarNoite <- falso
-
                fimse
 
 
                // ==================================================
-               // US5 - IDENTIFICAR AS FALTAS
+               // CALCULAR FALTAS
                // ==================================================
 
                se (clinicoNoite < 2) entao
-
                   faltaClinicoNoite <- 2 - clinicoNoite
-
                senao
-
                   faltaClinicoNoite <- 0
-
                fimse
-
 
                se (pediatraNoite < 1) entao
-
                   faltaPediatraNoite <- 1 - pediatraNoite
-
                senao
-
                   faltaPediatraNoite <- 0
-
                fimse
-
 
                se (cirurgiaoNoite < 1) entao
-
                   faltaCirurgiaoNoite <- 1 - cirurgiaoNoite
-
                senao
-
                   faltaCirurgiaoNoite <- 0
-
                fimse
 
 
                // ==================================================
-               // US6 - RESULTADO DA ANÁLISE
+               // TOTAL DE MEDICOS
                // ==================================================
 
-               se (publicarNoite = falso) entao
+               escreval("")
+               escreval("------------------------------------------")
+               escreval("TOTAL DE MEDICOS - NOITE")
+               escreval("------------------------------------------")
+               escreval("Clinicos Gerais: ", clinicoNoite)
+               escreval("Pediatras: ", pediatraNoite)
+               escreval("Cirurgioes: ", cirurgiaoNoite)
+               escreval("TOTAL: ", clinicoNoite + pediatraNoite + cirurgiaoNoite)
 
-                  respostaNoite <- "Não pode ser publicado!!!"
 
+               // ==================================================
+               // CONFIRMAR PUBLICACAO
+               // ==================================================
+
+               escreval("")
+               escreval("Deseja publicar o turno da NOITE? (S/N)")
+               leia(confirmacao)
+
+               se (confirmacao = "S") ou (confirmacao = "s") entao
+                  se publicarNoite = verdadeiro entao
+                     respostaNoite <- "PUBLICADO COM SUCESSO"
+                  senao
+                     respostaNoite <- "NAO PODE SER PUBLICADO - FALTAM MEDICOS"
+                  fimse
                senao
-
-                  respostaNoite <- "Pode ser publicado!!!"
-
+                  respostaNoite <- "NAO SERA PUBLICADO"
                fimse
 
             fimse
@@ -574,136 +475,154 @@ Inicio
 
       fimse
 
-      limpatela
-
    fimpara
 
 
    // ==================================================
-   // US6 - RESULTADO FINAL
+   // RELATORIO FINAL
    // ==================================================
 
    escreval("")
-   escreval("------------------------------------")
-   escreval("|     HOSPITAL SANTA AURORA        |")
-   escreval("------------------------------------")
+   escreval("")
+   escreval("==================================================")
+   escreval("              RELATORIO FINAL")
+   escreval("           HOSPITAL SANTA AURORA")
+   escreval("==================================================")
 
 
    // ==================================================
-   // US5 + US6 - RESULTADO DA MANHÃ
+   // MANHA
    // ==================================================
 
    escreval("")
-   escreval("TURNO DA MANHÃ")
-   escreval("Quantidade mínima:")
-   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
-   escreval("-----------------------------------------------")
+   escreval("------------------------------------------")
+   escreval("                MANHA")
+   escreval("------------------------------------------")
+   escreval("Clinicos Gerais: ", clinicoManha)
+   escreval("Pediatras: ", pediatraManha)
+   escreval("Cirurgioes: ", cirurgiaoManha)
+   escreval("TOTAL DE MEDICOS: ", clinicoManha + pediatraManha + cirurgiaoManha)
+   escreval("SITUACAO: ", respostaManha)
 
-   escreval(respostaManha)
+   se publicarManha = falso entao
 
-   escreval("Quantidade de Clínicos : ", clinicoManha)
-   escreval("Quantidade de Pediatras : ", pediatraManha)
-   escreval("Quantidade de Cirurgiões : ", cirurgiaoManha)
-
-
-   // US5 - MOSTRAR FALTAS
-
-   se (publicarManha = falso) entao
-
-      escreval("")
       escreval("FALTAS:")
 
-      se (faltaClinicoManha > 0) entao
-         escreval("Clínicos Gerais: faltam ", faltaClinicoManha)
+      se faltaClinicoManha > 0 entao
+         escreval("Clinicos Gerais: ", faltaClinicoManha)
       fimse
 
-      se (faltaPediatraManha > 0) entao
-         escreval("Pediatras: faltam ", faltaPediatraManha)
+      se faltaPediatraManha > 0 entao
+         escreval("Pediatras: ", faltaPediatraManha)
       fimse
 
-      se (faltaCirurgiaoManha > 0) entao
-         escreval("Cirurgiões: faltam ", faltaCirurgiaoManha)
+      se faltaCirurgiaoManha > 0 entao
+         escreval("Cirurgioes: ", faltaCirurgiaoManha)
       fimse
 
    fimse
 
 
    // ==================================================
-   // US5 + US6 - RESULTADO DA TARDE
+   // TARDE
    // ==================================================
 
    escreval("")
-   escreval("TURNO DA TARDE")
-   escreval("Quantidade mínima:")
-   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
-   escreval("-----------------------------------------------")
+   escreval("------------------------------------------")
+   escreval("                TARDE")
+   escreval("------------------------------------------")
+   escreval("Clinicos Gerais: ", clinicoTarde)
+   escreval("Pediatras: ", pediatraTarde)
+   escreval("Cirurgioes: ", cirurgiaoTarde)
+   escreval("TOTAL DE MEDICOS: ", clinicoTarde + pediatraTarde + cirurgiaoTarde)
+   escreval("SITUACAO: ", respostaTarde)
 
-   escreval(respostaTarde)
+   se publicarTarde = falso entao
 
-   escreval("Quantidade de Clínicos : ", clinicoTarde)
-   escreval("Quantidade de Pediatras : ", pediatraTarde)
-   escreval("Quantidade de Cirurgiões : ", cirurgiaoTarde)
-
-
-   // US5 - MOSTRAR FALTAS
-
-   se (publicarTarde = falso) entao
-
-      escreval("")
       escreval("FALTAS:")
 
-      se (faltaClinicoTarde > 0) entao
-         escreval("Clínicos Gerais: faltam ", faltaClinicoTarde)
+      se faltaClinicoTarde > 0 entao
+         escreval("Clinicos Gerais: ", faltaClinicoTarde)
       fimse
 
-      se (faltaPediatraTarde > 0) entao
-         escreval("Pediatras: faltam ", faltaPediatraTarde)
+      se faltaPediatraTarde > 0 entao
+         escreval("Pediatras: ", faltaPediatraTarde)
       fimse
 
-      se (faltaCirurgiaoTarde > 0) entao
-         escreval("Cirurgiões: faltam ", faltaCirurgiaoTarde)
+      se faltaCirurgiaoTarde > 0 entao
+         escreval("Cirurgioes: ", faltaCirurgiaoTarde)
       fimse
 
    fimse
 
 
    // ==================================================
-   // US5 + US6 - RESULTADO DA NOITE
+   // NOITE
    // ==================================================
 
    escreval("")
-   escreval("TURNO DA NOITE")
-   escreval("Quantidade mínima:")
-   escreval("2 Clínicos Gerais | 1 Pediatra | 1 Cirurgião")
-   escreval("-----------------------------------------------")
+   escreval("------------------------------------------")
+   escreval("                NOITE")
+   escreval("------------------------------------------")
+   escreval("Clinicos Gerais: ", clinicoNoite)
+   escreval("Pediatras: ", pediatraNoite)
+   escreval("Cirurgioes: ", cirurgiaoNoite)
+   escreval("TOTAL DE MEDICOS: ", clinicoNoite + pediatraNoite + cirurgiaoNoite)
+   escreval("SITUACAO: ", respostaNoite)
 
-   escreval(respostaNoite)
+   se publicarNoite = falso entao
 
-   escreval("Quantidade de Clínicos : ", clinicoNoite)
-   escreval("Quantidade de Pediatras : ", pediatraNoite)
-   escreval("Quantidade de Cirurgiões : ", cirurgiaoNoite)
-
-
-   // US5 - MOSTRAR FALTAS
-
-   se (publicarNoite = falso) entao
-
-      escreval("")
       escreval("FALTAS:")
 
-      se (faltaClinicoNoite > 0) entao
-         escreval("Clínicos Gerais: faltam ", faltaClinicoNoite)
+      se faltaClinicoNoite > 0 entao
+         escreval("Clinicos Gerais: ", faltaClinicoNoite)
       fimse
 
-      se (faltaPediatraNoite > 0) entao
-         escreval("Pediatras: faltam ", faltaPediatraNoite)
+      se faltaPediatraNoite > 0 entao
+         escreval("Pediatras: ", faltaPediatraNoite)
       fimse
 
-      se (faltaCirurgiaoNoite > 0) entao
-         escreval("Cirurgiões: faltam ", faltaCirurgiaoNoite)
+      se faltaCirurgiaoNoite > 0 entao
+         escreval("Cirurgioes: ", faltaCirurgiaoNoite)
       fimse
 
    fimse
+
+
+   // ==================================================
+   // TOTAL GERAL
+   // ==================================================
+
+   escreval("")
+   escreval("==================================================")
+   escreval("                 RESUMO GERAL")
+   escreval("==================================================")
+
+   escreval("TOTAL MANHA: ", clinicoManha + pediatraManha + cirurgiaoManha)
+   escreval("TOTAL TARDE: ", clinicoTarde + pediatraTarde + cirurgiaoTarde)
+   escreval("TOTAL NOITE: ", clinicoNoite + pediatraNoite + cirurgiaoNoite)
+
+   escreval("")
+   escreval("TOTAL GERAL DE MEDICOS: ", clinicoManha + pediatraManha + cirurgiaoManha + clinicoTarde + pediatraTarde + cirurgiaoTarde + clinicoNoite + pediatraNoite + cirurgiaoNoite)
+
+
+   // ==================================================
+   // PUBLICACOES
+   // ==================================================
+
+   escreval("")
+   escreval("==================================================")
+   escreval("             RESULTADO DAS PUBLICACOES")
+   escreval("==================================================")
+
+   escreval("MANHA: ", respostaManha)
+   escreval("TARDE: ", respostaTarde)
+   escreval("NOITE: ", respostaNoite)
+
+   escreval("")
+   escreval("==================================================")
+   escreval("               FIM DO RELATORIO")
+   escreval("==================================================")
 
 
 Fimalgoritmo
