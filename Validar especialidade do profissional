@@ -1,0 +1,104 @@
+Algoritmo "US10_Especialidade"
+
+Var
+   idMedico, turnoEscala, postoEscala : inteiro
+   especialidadeMedico, plantoesDiaMedico : inteiro
+   postosOcupadosManha, postosOcupadosTarde, postosOcupadosNoite : inteiro
+   nomeEspMedico, nomePosto, continuarEscala : caractere
+
+Inicio
+
+   plantoesDiaMedico <- 0
+   postosOcupadosManha <- 0
+   postosOcupadosTarde <- 0
+   postosOcupadosNoite <- 0
+
+   continuarEscala <- "S"
+   enquanto (continuarEscala = "S") ou (continuarEscala = "s") faca
+
+      escreval("")
+      escreval("==========================================")
+      escreval("       ATRIBUIR MEDICO A UM POSTO")
+      escreval("==========================================")
+
+      escreval("Informe o ID do medico:")
+      leia(idMedico)
+
+      escreval("Informe o turno (1-Manha, 2-Tarde, 3-Noite):")
+      leia(turnoEscala)
+      enquanto (turnoEscala < 1) ou (turnoEscala > 3) faca
+         escreval("ERRO: turno inexistente! Digite 1, 2 ou 3:")
+         leia(turnoEscala)
+      fimenquanto
+
+      escreval("Informe o posto (1-Clinico Geral, 2-Pediatra, 3-Cirurgiao):")
+      leia(postoEscala)
+      enquanto (postoEscala < 1) ou (postoEscala > 3) faca
+         escreval("ERRO: posto inexistente! Digite 1, 2 ou 3:")
+         leia(postoEscala)
+      fimenquanto
+
+      // Identificar a especialidade cadastrada do medico (simulacao pelo ID)
+      especialidadeMedico <- (idMedico MOD 3) + 1
+
+      se especialidadeMedico = 1 entao
+         nomeEspMedico <- "Clinico Geral"
+      senao
+         se especialidadeMedico = 2 entao
+            nomeEspMedico <- "Pediatra"
+         senao
+            nomeEspMedico <- "Cirurgiao"
+         fimse
+      fimse
+
+      // Identificar a especialidade exigida pelo posto
+      se postoEscala = 1 entao
+         nomePosto <- "Clinico Geral"
+      senao
+         se postoEscala = 2 entao
+            nomePosto <- "Pediatra"
+         senao
+            nomePosto <- "Cirurgiao"
+         fimse
+      fimse
+
+      escreval("Especialidade cadastrada do medico: ", nomeEspMedico)
+      escreval("Especialidade exigida pelo posto: ", nomePosto)
+
+      // Comparar: so escala se forem exatamente iguais
+      se especialidadeMedico = postoEscala entao
+
+         // Escalacao valida: registra, ocupa o posto e atualiza os plantoes
+         se turnoEscala = 1 entao
+            postosOcupadosManha <- postosOcupadosManha + 1
+         senao
+            se turnoEscala = 2 entao
+               postosOcupadosTarde <- postosOcupadosTarde + 1
+            senao
+               postosOcupadosNoite <- postosOcupadosNoite + 1
+            fimse
+         fimse
+         plantoesDiaMedico <- plantoesDiaMedico + 1
+
+         escreval("SUCESSO: Medico escalado no posto de ", nomePosto, ".")
+         escreval("Posto ocupado.")
+
+      senao
+
+         // Escalacao recusada: nao ocupa posto e nao altera os plantoes
+         escreval("RECUSA: Especialidade incompativel!")
+         escreval("O medico so pode atuar na especialidade cadastrada (", nomeEspMedico, ").")
+
+      fimse
+
+      escreval("")
+      escreval("Plantoes do medico: ", plantoesDiaMedico)
+      escreval("Postos ocupados - Manha: ", postosOcupadosManha, " | Tarde: ", postosOcupadosTarde, " | Noite: ", postosOcupadosNoite)
+
+      escreval("")
+      escreval("Deseja tentar outra escalacao? (S/N)")
+      leia(continuarEscala)
+
+   fimenquanto
+
+Fimalgoritmo
