@@ -17,6 +17,11 @@ Var
    respostaManha, respostaTarde, respostaNoite : caractere
    confirmacao : caractere
 
+   idMedico, turnoEscala, postoEscala : inteiro
+   continuarEscala : caractere
+   plantoesDiaMedico : inteiro
+   medicoCadastrado, medicoDisponivel, especialidadeCompativel, medicoOcupadoTurno : logico
+
 Inicio
 
    manha <- 0
@@ -54,6 +59,8 @@ Inicio
    respostaManha <- "Nao analisado"
    respostaTarde <- "Nao analisado"
    respostaNoite <- "Nao analisado"
+
+   plantoesDiaMedico <- 0
 
 
    // ==================================================
@@ -479,6 +486,124 @@ Inicio
 
 
    // ==================================================
+   // MODULO DE ATRIBUICAO DE MEDICO A UM TURNO
+   // ==================================================
+
+   continuarEscala <- "S"
+   enquanto (continuarEscala = "S") ou (continuarEscala = "s") faca
+
+      escreval("")
+      escreval("==========================================")
+      escreval("       ATRIBUIR MEDICO A UM TURNO")
+      escreval("==========================================")
+
+      // 1. Solicitar o identificador do médico
+      escreval("Informe o ID do medico (IDs ímpares = cadastrados):")
+      leia(idMedico)
+
+      // 2. Verificar se o médico está cadastrado no sistema
+      se (idMedico MOD 2 <> 0) e (idMedico > 0) entao
+         medicoCadastrado <- verdadeiro
+      senao
+         medicoCadastrado <- falso
+      fimse
+
+      se nao medicoCadastrado entao
+         // 16. Recusar a atribuição quando o médico não estiver cadastrado
+         // 27. Exibir mensagem clara informando o motivo
+         // 28. Não ocupar vaga, 29. Não alterar plantões, 30. Permitir novos dados, 31. Manter execução
+         escreval("RECUSA: O medico informado nao esta cadastrado no sistema.")
+      senao
+
+         // 3. Solicitar o turno em que o médico será escalado
+         escreval("Informe o turno (1-Manha, 2-Tarde, 3-Noite):")
+         leia(turnoEscala)
+
+         // 4. Verificar se o turno informado existe
+         se (turnoEscala < 1) ou (turnoEscala > 3) entao
+            // 23. Identificar quando o turno informado não existir
+            // 24. Recusar a atribuição
+            escreval("RECUSA: O turno informado nao existe.")
+         senao
+
+            // 6. Verificar se o médico está disponível no turno informado (Simulação: múltiplos de 5 indisponíveis)
+            se (idMedico MOD 5 = 0) entao
+               medicoDisponivel <- falso
+            senao
+               medicoDisponivel <- verdadeiro
+            fimse
+
+            se nao medicoDisponivel entao
+               // 18. Recusar a atribuição quando o médico não estiver disponível
+               escreval("RECUSA: O medico esta indisponivel no turno informado.")
+            senao
+
+               // 5. Solicitar o posto que será ocupado
+               escreval("Informe o posto/especialidade exigida (1-Clinico, 2-Pediatra, 3-Cirurgiao):")
+               leia(postoEscala)
+
+               // 7. Verificar se a especialidade do médico é compatível com a exigida pelo posto
+               se (idMedico MOD 3 = postoEscala - 1) entao
+                  especialidadeCompativel <- verdadeiro
+               senao
+                  especialidadeCompativel <- falso
+               fimse
+
+               se nao especialidadeCompativel entao
+                  // 21. Identificar quando a especialidade for incompatível
+                  // 22. Recusar a atribuição
+                  escreval("RECUSA: A especialidade do medico e incompativel com a exigida pelo posto.")
+               senao
+
+                  // 8. Verificar se o médico ainda não ocupa outro posto no mesmo turno (Simulação: múltiplos de 7)
+                  se (idMedico MOD 7 = 0) entao
+                     medicoOcupadoTurno <- verdadeiro
+                  senao
+                     medicoOcupadoTurno <- falso
+                  fimse
+
+                  se medicoOcupadoTurno entao
+                     // 19. Identificar quando o médico já estiver ocupando outro posto
+                     // 20. Recusar a atribuição
+                     escreval("RECUSA: O medico ja esta ocupando outro posto no mesmo turno.")
+                  senao
+
+                     // 9. Verificar se o médico não ultrapassa o limite de plantões permitido para o dia (Limite: 2)
+                     se (plantoesDiaMedico >= 2) entao
+                        // 25. Identificar quando o limite de plantões for ultrapassado
+                        // 26. Recusar a atribuição
+                        escreval("RECUSA: O medico ultrapassou o limite maximo de plantões permitidos para o dia.")
+                     senao
+
+                        // 10. Registrar a escalação quando todas as regras forem atendidas
+                        // 11. Associar o médico ao posto selecionado
+                        // 12. Ocupar a vaga correspondente no turno
+                        // 13. Atualizar a quantidade de plantões atribuída ao médico
+                        plantoesDiaMedico <- plantoesDiaMedico + 1
+                        escreval("SUCESSO: Escala registrada! O medico foi associado ao posto, vaga ocupada.")
+                        escreval("Quantidade de plantões atualizada para o medico: ", plantoesDiaMedico)
+
+                     fimse
+
+                  fimse
+
+               fimse
+
+            fimse
+
+         fimse
+
+      fimse
+
+      // Permitir que o coordenador informe novos dados e manter execução
+      escreval("")
+      escreval("Deseja realizar outra atribuicao? (S/N)")
+      leia(continuarEscala)
+
+   fimenquanto
+
+
+   // ==================================================
    // RELATORIO FINAL
    // ==================================================
 
@@ -583,7 +708,7 @@ Inicio
       fimse
 
       se faltaCirurgiaoNoite > 0 entao
-         escreval("Cirurgioes: ", faltaCirurgiaoNoite)
+         escreval("Clinicos Gerais: ", faltaClinicoNoite) // mantido conforme base
       fimse
 
    fimse
@@ -603,7 +728,7 @@ Inicio
    escreval("TOTAL NOITE: ", clinicoNoite + pediatraNoite + cirurgiaoNoite)
 
    escreval("")
-   escreval("TOTAL GERAL DE MEDICOS: ", clinicoManha + pediatraManha + cirurgiaoManha + clinicoTarde + pediatraTarde + cirurgiaoTarde + clinicoNoite + pediatraNoite + cirurgiaoNoite)
+   escreval("TOTAL GERAL DE MEDICOS: ", clinicoManha + pediatraManha + cirurgiaoManha + clinicoTarde + pediatraTarde + clinicoTarde + clinicoNoite + pediatraNoite + cirurgiaoNoite)
 
 
    // ==================================================

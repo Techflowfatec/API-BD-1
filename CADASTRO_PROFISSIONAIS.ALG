@@ -138,4 +138,20 @@ Inicio
 
       escreval("--------------------------------")
    fimpara
+ escreva ("digite o identificador do profissional")
+   leia (profissionalId)
+   leia (profissionalNome)
+   leia (profissionalTurno1)
+   leia (profissionalTurno2)
+   leia (profissionalEspecialidade1)
+   leia (profissionalEspecialidade2)
+   leia (profissionalEspecialidade3)
+   escreva  (profissionalId)
+   escreva  (profissionalNome)
+   escreva  (profissionalTurno1)
+   escreva  (profissionalTurno2)
+   escreva  (profissionalEspecialidade1)
+   escreva  (profissionalEspecialidade2)
+   escreva  (profissionalEspecialidade3)
+
 Fimalgoritmo
