@@ -70,6 +70,15 @@ Transformar o processo manual em um sistema que:
 | 11 |Como coordenador de escala, quero impedir que um médico tenha mais de dois plantões no mesmo dia, para respeitar o limite estabelecido para a escala. | Média | 2 |
 | 12 |Como coordenador de escala, quero visualizar um resumo do dia, para conferir a escala e a cobertura dos três turnos. | Média | 2 |
 | 13 | Como coordenador de escala, quero visualizar a lista de todos os profissionais cadastrados, para ter uma visão geral da equipe médica disponível. | Média | 2 |
+| 14 |  Implementação da Escala Semanal de Médicos. | Baixo | 3 |
+| 15 |  Controle de Limite Semanal de Plantões e Regra de Descanso dos Médicos. | Baixo | 3 |
+| 16 |  Remoção de Profissionais Escalados e Alteração de Cadastro. | Baixo | 3 |
+| 17 |  Visualização da Cobertura Semanal e Identificação de Turnos com Cobertura Insuficiente. | Baixo | 3 |
+| 18 |  Visualização dos Indicadores de Carga de Plantões dos Médicos. | Baixo | 3 |
+| 19 |  Indicadores de Cobertura Semanal e Identificação de Falhas por Especialidade. | Baixo | 3 |
+| 20 |  Geração de Relatório Semanal com Indicadores Gerenciais da Escala. | Baixo | 3 |
+
+
 
 ---
 
@@ -144,8 +153,6 @@ Transformar o processo manual em um sistema que:
 |---|---|
 | *Bruno Amaral* | Product Owner |
 | *Amanda Mesquita* | Scrum Master |
-| *Ana Clara Brito* | Desenvolvedor |
-| *Guilherme Ribeiro* | Desenvolvedor |
 | *Pedro Rosa* | Desenvolvedor |
 | *Pedro Albino* | Desenvolvedor |
 | *Karina Fernanda* | Desenvolvedor |
@@ -157,8 +164,8 @@ Transformar o processo manual em um sistema que:
 | Fase | Status |
 |---|---|
 | Sprint 1 | Finalizada |
-| Sprint 2 | ⏳ Planejada |
-| Sprint 3 | ⏳ Planejada |
+| Sprint 2 | Finalizada |
+| Sprint 3 | Finalizada |
 
 ---
 
