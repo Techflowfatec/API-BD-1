@@ -5,7 +5,6 @@ var
    i, j, d, t, turno, dia, codigoEsp, confirmacao: inteiro
    indice, indiceDisponibilidade, indiceEscala, indiceDemanda: inteiro
    totalTurno, totalEspecialidade, totalDia, totalSemana: inteiro
-   quantidadeNecessaria, somaDemanda: inteiro
    demandaTemporaria: vetor[1..3] de inteiro
    escaladosEsp, disponiveisEsp, faltam: inteiro
    totalCobertos, falhasClinica, falhasPediatria, falhasCirurgia: inteiro
@@ -32,42 +31,54 @@ inicio
       escala[i] <- 0
    fimpara
 
-   // Demanda inicial: um profissional de cada especialidade por turno.
-   // Pode ser alterada pela opcao 6.
+   // Demanda padrao por turno: Clinica Geral = 2; Pediatria e Cirurgia = 1.
+   // Esta demanda e fixa para todos os dias e turnos da semana.
    para i de 1 ate 45 faca
       demanda[i] <- 1
    fimpara
+   para d de 1 ate 5 faca
+      para turno de 1 ate 3 faca
+         indiceDemanda <- ((d - 1) * 3 + (turno - 1)) * 3 + 1
+         demanda[indiceDemanda] <- 2
+      fimpara
+   fimpara
 
    repita
+      limpatela
       escreval("")
-      escreval("=================================================")
-      escreval(" SISTEMA DE ESCALA MEDICA - SEMANA DE SEGUNDA A SEXTA")
-      escreval("=================================================")
-      escreval("1 - Cadastrar profissional")
-      escreval("2 - Consultar profissional")
-      escreval("3 - Listar profissionais cadastrados")
-      escreval("4 - Escalar profissional em um dia e turno")
-      escreval("5 - Ver resumo de um dia")
-      escreval("6 - Definir demandas minimas da semana")
-      escreval("7 - Remover profissional de um dia e turno")
-      escreval("8 - Alterar especialidade/disponibilidade")
-      escreval("9 - Visualizar cobertura da semana")
-      escreval("10 - Ver indicadores gerenciais")
-      escreval("11 - Gerar relatorio textual da semana")
-      escreval("12 - Encerrar o sistema")
-      escreva("Digite uma opcao: ")
+      escreval("+----------------------------------------------------------+")
+      escreval("|                 TECHFLOW - ESCALA MEDICA                 |")
+      escreval("|           PLANEJAMENTO SEMANAL: SEGUNDA A SEXTA          |")
+      escreval("+----------------------------------------------------------+")
+      escreval("| CADASTRO E ESCALA                                        |")
+      escreval("| [01] Cadastrar profissional                              |")
+      escreval("| [02] Consultar profissional                              |")
+      escreval("| [03] Listar equipe                                       |")
+      escreval("| [04] Escalar profissional (dia/turno)                    |")
+      escreval("| [05] Resumo de um dia                                    |")
+      escreval("| [06] Remover profissional da escala                      |")
+      escreval("| [07] Alterar especialidade/disponibilidade               |")
+      escreval("|----------------------------------------------------------|")
+      escreval("| ANALISE E RELATORIOS                                     |")
+      escreval("| [08] Cobertura semanal                                   |")
+      escreval("| [09] Indicadores e relatorio semanal                     |")
+      escreval("| [10] Encerrar                                            |")
+      escreval("+----------------------------------------------------------+")
+      escreval("Demanda fixa por turno: Clinico Geral 2 | Pediatria 1 | Cirurgia 1")
+      escreval("Equipe cadastrada: ", quantidade, " profissional(is) | Limite: 100")
+      escreva("Escolha uma opcao [1-10]: ")
       leia(opcao)
 
       se opcao = 1 entao
          escreval("")
-         escreval("--- CADASTRO DE PROFISSIONAL ---")
+         escreval("+---------------- CADASTRO DE PROFISSIONAL ----------------+")
          se quantidade >= 100 entao
             escreval("Limite de 100 profissionais atingido. Cadastro nao realizado.")
          senao
             escreva("Identificador/CRM unico: ")
             leia(crmEntrada)
             se crmEntrada = "" entao
-               escreval("Erro: o identificador nao pode ficar vazio. Cadastro cancelado.")
+               escreval("[ERRO] o identificador nao pode ficar vazio. Cadastro cancelado.")
             senao
                indice <- 0
                para i de 1 ate quantidade faca
@@ -77,18 +88,18 @@ inicio
                fimpara
 
                se indice <> 0 entao
-                  escreval("Erro: esse identificador ja esta cadastrado.")
+                  escreval("[ERRO] esse identificador ja esta cadastrado.")
                senao
                   escreva("Nome completo: ")
                   leia(nomeEntrada)
                   se nomeEntrada = "" entao
-                     escreval("Erro: o nome nao pode ficar vazio. Cadastro cancelado.")
+                     escreval("[ERRO] o nome nao pode ficar vazio. Cadastro cancelado.")
                   senao
                      escreval("Especialidade: 1 - Clinica Geral | 2 - Pediatria | 3 - Cirurgia")
                      escreva("Codigo da especialidade: ")
                      leia(codigoEsp)
                      enquanto (codigoEsp < 1) ou (codigoEsp > 3) faca
-                        escreval("Opcao invalida. Digite 1, 2 ou 3.")
+                        escreval("[ERRO] Opcao invalida. Digite 1, 2 ou 3.")
                         escreva("Codigo da especialidade: ")
                         leia(codigoEsp)
                      fimenquanto
@@ -106,7 +117,7 @@ inicio
                         fimse
                         leia(confirmacao)
                         enquanto (confirmacao <> 0) e (confirmacao <> 1) faca
-                           escreval("Resposta invalida. Digite 1 para Sim ou 0 para Nao.")
+                           escreval("[ERRO] Resposta invalida. Digite 1 para Sim ou 0 para Nao.")
                            escreva("Disponibilidade: ")
                            leia(confirmacao)
                         fimenquanto
@@ -118,7 +129,7 @@ inicio
                      crm[quantidade] <- crmEntrada
                      nome[quantidade] <- nomeEntrada
                      especialidade[quantidade] <- codigoEsp
-                     escreval("Cadastro realizado com sucesso.")
+                     escreval("[OK] Cadastro realizado com sucesso.")
                   fimse
                fimse
             fimse
@@ -127,7 +138,7 @@ inicio
 
       se opcao = 2 entao
          escreval("")
-         escreval("--- CONSULTA DE PROFISSIONAL ---")
+         escreval("+---------------- CONSULTA DE PROFISSIONAL ----------------+")
          escreva("Digite o identificador/CRM: ")
          leia(crmEntrada)
          indice <- 0
@@ -138,8 +149,11 @@ inicio
          fimpara
 
          se indice = 0 entao
-            escreval("Nenhum profissional encontrado com esse identificador.")
+            escreval("[AVISO] Nenhum profissional encontrado com esse identificador.")
          senao
+            escreval("+----------------------------------------------------------+")
+            escreval("| FICHA DO PROFISSIONAL                                    |")
+            escreval("+----------------------------------------------------------+")
             escreval("Nome: ", nome[indice])
             escreval("Identificador/CRM: ", crm[indice])
             escreva("Especialidade: ")
@@ -152,7 +166,8 @@ inicio
                   escreval("Cirurgia")
                fimse
             fimse
-            escreval("Disponibilidade semanal:")
+            escreval("")
+            escreval("DISPONIBILIDADE SEMANAL")
             indiceDisponibilidade <- (indice - 1) * 3 + 1
             se disponivel[indiceDisponibilidade] = 1 entao
                escreval("- Manha: disponivel")
@@ -174,13 +189,17 @@ inicio
 
       se opcao = 3 entao
          escreval("")
-         escreval("--- PROFISSIONAIS CADASTRADOS ---")
+         escreval("+--------------------- EQUIPE CADASTRADA ------------------+")
          se quantidade = 0 entao
             escreval("Ainda nao ha profissionais cadastrados. Use a opcao 1 para cadastrar.")
          senao
             para i de 1 ate quantidade faca
                escreval("")
-               escreval("Profissional ", i, " | Nome: ", nome[i], " | Identificador/CRM: ", crm[i])
+               escreval("+----------------------------------------------------------+")
+               escreval("| PROFISSIONAL ", i)
+               escreval("+----------------------------------------------------------+")
+               escreval("Nome: ", nome[i])
+               escreval("Identificador/CRM: ", crm[i])
                escreva("Especialidade: ")
                se especialidade[i] = 1 entao
                   escreval("Clinica Geral")
@@ -191,6 +210,7 @@ inicio
                      escreval("Cirurgia")
                   fimse
                fimse
+               escreval("")
                escreva("Disponibilidade: ")
                indiceDisponibilidade <- (i - 1) * 3 + 1
                se disponivel[indiceDisponibilidade] = 1 entao
@@ -212,12 +232,12 @@ inicio
 
       se opcao = 4 entao
          escreval("")
-         escreval("--- ESCALAR PROFISSIONAL NA SEMANA ---")
-         escreval("Dia: 1-Segunda | 2-Terca | 3-Quarta | 4-Quinta | 5-Sexta")
+         escreval("+-------------------- MONTAR ESCALA SEMANAL --------------+")
+         escreval("Selecione o dia: [1] Segunda [2] Terca [3] Quarta [4] Quinta [5] Sexta")
          escreva("Codigo do dia: ")
          leia(dia)
          enquanto (dia < 1) ou (dia > 5) faca
-            escreval("Dia invalido. Digite um numero de 1 a 5.")
+            escreval("[ERRO] Dia invalido. Digite um numero de 1 a 5.")
             escreva("Codigo do dia: ")
             leia(dia)
          fimenquanto
@@ -226,7 +246,7 @@ inicio
          escreva("Codigo do turno: ")
          leia(turno)
          enquanto (turno < 1) ou (turno > 3) faca
-            escreval("Turno invalido. Digite um numero de 1 a 3.")
+            escreval("[ERRO] Turno invalido. Digite um numero de 1 a 3.")
             escreva("Codigo do turno: ")
             leia(turno)
          fimenquanto
@@ -241,7 +261,7 @@ inicio
          fimpara
 
          se indice = 0 entao
-            escreval("Erro: profissional nao cadastrado. Escala nao alterada.")
+            escreval("[ERRO] profissional nao cadastrado. Escala nao alterada.")
          senao
             indiceEscala <- (indice - 1) * 15 + (dia - 1) * 3 + turno
             se escala[indiceEscala] = 1 entao
@@ -262,18 +282,18 @@ inicio
                fimpara
 
                se disponivel[indiceDisponibilidade] = 0 entao
-                  escreval("Erro: profissional indisponivel nesse turno. Escala nao alterada.")
+                  escreval("[ERRO] profissional indisponivel nesse turno. Escala nao alterada.")
                senao
                   se totalDia >= 2 entao
-                     escreval("Erro: limite de dois plantoes no mesmo dia atingido.")
+                     escreval("[ERRO] limite de dois plantoes no mesmo dia atingido.")
                   senao
                      se totalSemana >= 6 entao
-                        escreval("Erro: limite semanal de seis plantoes atingido.")
+                        escreval("[ERRO] limite semanal de seis plantoes atingido.")
                      senao
                         se (turno = 1) e (dia > 1) entao
                            indiceEscala <- (indice - 1) * 15 + (dia - 2) * 3 + 3
                            se escala[indiceEscala] = 1 entao
-                              escreval("Erro: descanso obrigatorio. Nao pode trabalhar de manha apos plantao na noite anterior.")
+                              escreval("[ERRO] descanso obrigatorio. Nao pode trabalhar de manha apos plantao na noite anterior.")
                            senao
                               totalTurno <- 0
                               para i de 1 ate quantidade faca
@@ -281,11 +301,11 @@ inicio
                                  totalTurno <- totalTurno + escala[indiceEscala]
                               fimpara
                               se totalTurno >= 4 entao
-                                 escreval("Erro: o turno ja atingiu o limite de quatro postos.")
+                                 escreval("[ERRO] o turno ja atingiu o limite de quatro postos.")
                               senao
                                  indiceEscala <- (indice - 1) * 15 + (dia - 1) * 3 + turno
                                  escala[indiceEscala] <- 1
-                                 escreval("Profissional escalado com sucesso.")
+                                 escreval("[OK] Profissional escalado com sucesso.")
                               fimse
                            fimse
                         senao
@@ -295,11 +315,11 @@ inicio
                               totalTurno <- totalTurno + escala[indiceEscala]
                            fimpara
                            se totalTurno >= 4 entao
-                              escreval("Erro: o turno ja atingiu o limite de quatro postos.")
+                              escreval("[ERRO] o turno ja atingiu o limite de quatro postos.")
                            senao
                               indiceEscala <- (indice - 1) * 15 + (dia - 1) * 3 + turno
                               escala[indiceEscala] <- 1
-                              escreval("Profissional escalado com sucesso.")
+                              escreval("[OK] Profissional escalado com sucesso.")
                            fimse
                         fimse
                      fimse
@@ -311,41 +331,43 @@ inicio
 
       se opcao = 5 entao
          escreval("")
-         escreval("--- RESUMO DE UM DIA ---")
-         escreval("Dia: 1-Segunda | 2-Terca | 3-Quarta | 4-Quinta | 5-Sexta")
+         escreval("+------------------------ RESUMO DO DIA -------------------+")
+         escreval("Selecione o dia: [1] Segunda [2] Terca [3] Quarta [4] Quinta [5] Sexta")
          escreva("Codigo do dia: ")
          leia(dia)
          enquanto (dia < 1) ou (dia > 5) faca
-            escreval("Dia invalido. Digite um numero de 1 a 5.")
+            escreval("[ERRO] Dia invalido. Digite um numero de 1 a 5.")
             escreva("Codigo do dia: ")
             leia(dia)
          fimenquanto
 
-         para turno de 1 ate 3 faca
-            se dia = 1 entao
-               escreval("SEGUNDA")
+         escreval("")
+         se dia = 1 entao
+            escreval("+------------------------ SEGUNDA-FEIRA -------------------+")
+         senao
+            se dia = 2 entao
+               escreval("+--------------------------- TERCA-FEIRA ------------------+")
             senao
-               se dia = 2 entao
-                  escreval("TERCA")
+               se dia = 3 entao
+                  escreval("+--------------------------- QUARTA-FEIRA -----------------+")
                senao
-                  se dia = 3 entao
-                     escreval("QUARTA")
+                  se dia = 4 entao
+                     escreval("+--------------------------- QUINTA-FEIRA -----------------+")
                   senao
-                     se dia = 4 entao
-                        escreval("QUINTA")
-                     senao
-                        escreval("SEXTA")
-                     fimse
+                     escreval("+--------------------------- SEXTA-FEIRA ------------------+")
                   fimse
                fimse
             fimse
+         fimse
+
+         para turno de 1 ate 3 faca
             se turno = 1 entao
-               escreval("MANHA")
+               escreval("[ TURNO: MANHA ]")
             senao
                se turno = 2 entao
-                  escreval("TARDE")
+                  escreval("[ TURNO: TARDE ]")
                senao
-                  escreval("NOITE")
+                  escreval("[ TURNO: NOITE ]")
                fimse
             fimse
             totalTurno <- 0
@@ -365,7 +387,7 @@ inicio
                   fimse
                fimse
             fimpara
-            escreval("Total escalado: ", totalTurno, " de 4 postos")
+            escreval("  Ocupacao: ", totalTurno, "/4 posto(s)")
             para j de 1 ate 3 faca
                escaladosEsp <- 0
                para i de 1 ate quantidade faca
@@ -376,23 +398,23 @@ inicio
                fimpara
                indiceDemanda <- ((dia - 1) * 3 + (turno - 1)) * 3 + j
                se j = 1 entao
-                  escreva("Clinica Geral: ")
+                  escreva("  Clinica Geral  | ")
                senao
                   se j = 2 entao
-                     escreva("Pediatria: ")
+                     escreva("  Pediatria      | ")
                   senao
-                     escreva("Cirurgia: ")
+                     escreva("  Cirurgia       | ")
                   fimse
                fimse
                faltam <- demanda[indiceDemanda] - escaladosEsp
                se faltam < 0 entao
                   faltam <- 0
                fimse
-               escreva(escaladosEsp, " escalado(s); minimo: ", demanda[indiceDemanda])
+               escreva("Escalados ", escaladosEsp, " | Minimo ", demanda[indiceDemanda])
                se faltam = 0 entao
-                  escreval("; cobertura atingida")
+                  escreval(" | [OK] COBERTURA ATINGIDA")
                senao
-                  escreval("; faltam ", faltam)
+                  escreval(" | [PENDENTE] Faltam ", faltam)
                fimse
             fimpara
          fimpara
@@ -400,82 +422,18 @@ inicio
 
       se opcao = 6 entao
          escreval("")
-         escreval("--- DEFINIR DEMANDAS MINIMAS DA SEMANA ---")
-         escreval("Informe os minimos para cada dia e turno.")
-         escreval("A soma das tres especialidades em cada turno nao pode passar de 4 postos.")
-         para d de 1 ate 5 faca
-            para turno de 1 ate 3 faca
-               repita
-                  se d = 1 entao
-                     escreval("SEGUNDA")
-                  senao
-                     se d = 2 entao
-                        escreval("TERCA")
-                     senao
-                        se d = 3 entao
-                           escreval("QUARTA")
-                        senao
-                           se d = 4 entao
-                              escreval("QUINTA")
-                           senao
-                              escreval("SEXTA")
-                           fimse
-                        fimse
-                     fimse
-                  fimse
-                  se turno = 1 entao
-                     escreval("MANHA")
-                  senao
-                     se turno = 2 entao
-                        escreval("TARDE")
-                     senao
-                        escreval("NOITE")
-                     fimse
-                  fimse
-                  para j de 1 ate 3 faca
-                     se j = 1 entao
-                        escreva("Minimo de Clinica Geral (0 a 4): ")
-                     senao
-                        se j = 2 entao
-                           escreva("Minimo de Pediatria (0 a 4): ")
-                        senao
-                           escreva("Minimo de Cirurgia (0 a 4): ")
-                        fimse
-                     fimse
-                     leia(demandaTemporaria[j])
-                     enquanto (demandaTemporaria[j] < 0) ou (demandaTemporaria[j] > 4) faca
-                        escreval("Valor invalido. Digite um numero de 0 a 4.")
-                        leia(demandaTemporaria[j])
-                     fimenquanto
-                  fimpara
-                  somaDemanda <- demandaTemporaria[1] + demandaTemporaria[2] + demandaTemporaria[3]
-                  se somaDemanda > 4 entao
-                     escreval("A soma excede os quatro postos do turno. Informe os tres valores novamente.")
-                  fimse
-               ate somaDemanda <= 4
-               para j de 1 ate 3 faca
-                  indiceDemanda <- ((d - 1) * 3 + (turno - 1)) * 3 + j
-                  demanda[indiceDemanda] <- demandaTemporaria[j]
-               fimpara
-            fimpara
-         fimpara
-         escreval("Demandas minimas da semana atualizadas.")
-      fimse
-
-      se opcao = 7 entao
-         escreval("")
-         escreval("--- REMOVER PROFISSIONAL DA ESCALA ---")
-         escreval("Dia: 1-Segunda | 2-Terca | 3-Quarta | 4-Quinta | 5-Sexta")
+         escreval("+-------------------- REMOVER DA ESCALA -------------------+")
+         escreval("Selecione o dia: [1] Segunda [2] Terca [3] Quarta [4] Quinta [5] Sexta")
          escreva("Codigo do dia: ")
          leia(dia)
          enquanto (dia < 1) ou (dia > 5) faca
-            escreval("Dia invalido. Digite um numero de 1 a 5.")
+            escreval("[ERRO] Dia invalido. Digite um numero de 1 a 5.")
             leia(dia)
          fimenquanto
          escreva("Turno: 1-Manha | 2-Tarde | 3-Noite: ")
          leia(turno)
          enquanto (turno < 1) ou (turno > 3) faca
-            escreval("Turno invalido. Digite um numero de 1 a 3.")
+            escreval("[ERRO] Turno invalido. Digite um numero de 1 a 3.")
             leia(turno)
          fimenquanto
          escreva("Identificador/CRM do profissional: ")
@@ -494,14 +452,14 @@ inicio
                escreval("Esse profissional nao esta escalado nesse dia e turno.")
             senao
                escala[indiceEscala] <- 0
-               escreval("Escalacao removida. O posto foi liberado e a cobertura sera recalculada automaticamente.")
+               escreval("[OK] Escalacao removida; posto liberado e cobertura recalculada automaticamente.")
             fimse
          fimse
       fimse
 
-      se opcao = 8 entao
+      se opcao = 7 entao
          escreval("")
-         escreval("--- ALTERAR ESPECIALIDADE/DISPONIBILIDADE ---")
+         escreval("+-------------- ALTERAR DADOS DO PROFISSIONAL -------------+")
          escreva("Identificador/CRM do profissional: ")
          leia(crmEntrada)
          indice <- 0
@@ -517,7 +475,7 @@ inicio
             escreva("Codigo da especialidade: ")
             leia(codigoEsp)
             enquanto (codigoEsp < 1) ou (codigoEsp > 3) faca
-               escreval("Opcao invalida. Digite 1, 2 ou 3.")
+               escreval("[ERRO] Opcao invalida. Digite 1, 2 ou 3.")
                leia(codigoEsp)
             fimenquanto
             para t de 1 ate 3 faca
@@ -532,7 +490,7 @@ inicio
                fimse
                leia(demandaTemporaria[t])
                enquanto (demandaTemporaria[t] <> 0) e (demandaTemporaria[t] <> 1) faca
-                  escreval("Resposta invalida. Digite 1 para Sim ou 0 para Nao.")
+                  escreval("[ERRO] Resposta invalida. Digite 1 para Sim ou 0 para Nao.")
                   leia(demandaTemporaria[t])
                fimenquanto
             fimpara
@@ -557,44 +515,45 @@ inicio
                para t de 1 ate 3 faca
                   disponivel[indiceDisponibilidade + t] <- demandaTemporaria[t]
                fimpara
-               escreval("Especialidade e disponibilidade atualizadas com sucesso.")
+               escreval("[OK] Especialidade e disponibilidade atualizadas com sucesso.")
             fimse
          fimse
       fimse
 
-      se opcao = 9 entao
+      se opcao = 8 entao
          escreval("")
-         escreval("--- COBERTURA DA SEMANA ---")
+         escreval("+---------------------- COBERTURA SEMANAL -----------------+")
          totalCobertos <- 0
          falhasClinica <- 0
          falhasPediatria <- 0
          falhasCirurgia <- 0
          para d de 1 ate 5 faca
             se d = 1 entao
-               escreval("SEGUNDA")
+               escreval("+------------------------ SEGUNDA-FEIRA -------------------+")
             senao
                se d = 2 entao
-                  escreval("TERCA")
+                  escreval("+--------------------------- TERCA-FEIRA ------------------+")
                senao
                   se d = 3 entao
-                     escreval("QUARTA")
+                     escreval("+--------------------------- QUARTA-FEIRA -----------------+")
                   senao
                      se d = 4 entao
-                        escreval("QUINTA")
+                        escreval("+--------------------------- QUINTA-FEIRA -----------------+")
                      senao
-                        escreval("SEXTA")
+                        escreval("+--------------------------- SEXTA-FEIRA ------------------+")
                      fimse
                   fimse
                fimse
             fimse
             para turno de 1 ate 3 faca
+               escreval("")
                se turno = 1 entao
-                  escreva("MANHA: ")
+                  escreval("  +-- MANHA -----------------------------------------------+")
                senao
                   se turno = 2 entao
-                     escreva("TARDE: ")
+                     escreval("  +-- TARDE -----------------------------------------------+")
                   senao
-                     escreva("NOITE: ")
+                     escreval("  +-- NOITE -----------------------------------------------+")
                   fimse
                fimse
                semanaCompleta <- verdadeiro
@@ -609,55 +568,58 @@ inicio
                   indiceDemanda <- ((d - 1) * 3 + (turno - 1)) * 3 + j
                   faltam <- demanda[indiceDemanda] - escaladosEsp
                   se j = 1 entao
-                     escreva("Clinica Geral ", escaladosEsp, "/", demanda[indiceDemanda], " ")
+                     escreva("     Clinica Geral | ")
                      se faltam > 0 entao
                         falhasClinica <- falhasClinica + 1
                         semanaCompleta <- falso
-                        escreva("(FALTA ", faltam, ") ")
+                        escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [FALTA ", faltam, "]")
+                     senao
+                        escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [OK]")
                      fimse
                   senao
                      se j = 2 entao
-                        escreva("Pediatria ", escaladosEsp, "/", demanda[indiceDemanda], " ")
+                        escreva("     Pediatria     | ")
                         se faltam > 0 entao
                            falhasPediatria <- falhasPediatria + 1
                            semanaCompleta <- falso
-                           escreva("(FALTA ", faltam, ") ")
+                           escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [FALTA ", faltam, "]")
+                        senao
+                           escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [OK]")
                         fimse
                      senao
-                        escreva("Cirurgia ", escaladosEsp, "/", demanda[indiceDemanda], " ")
+                        escreva("     Cirurgia      | ")
                         se faltam > 0 entao
                            falhasCirurgia <- falhasCirurgia + 1
                            semanaCompleta <- falso
-                           escreva("(FALTA ", faltam, ") ")
+                           escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [FALTA ", faltam, "]")
+                        senao
+                           escreval("Escalados ", escaladosEsp, " / Minimo ", demanda[indiceDemanda], " | [OK]")
                         fimse
                      fimse
                   fimse
                fimpara
                se semanaCompleta entao
                   totalCobertos <- totalCobertos + 1
-                  escreval("| turno coberto")
+                  escreval("     Situacao: [OK] TURNO COBERTO")
                senao
-                  escreval("| TURNO COM COBERTURA INSUFICIENTE")
+                  escreval("     Situacao: [ATENCAO] COBERTURA INSUFICIENTE")
                fimse
             fimpara
          fimpara
-         escreval("Turnos plenamente cobertos: ", totalCobertos, " de 15")
+         escreval("------------------------------------------------------------")
+         escreval("RESUMO DA SEMANA: ", totalCobertos, " de 15 turnos plenamente cobertos")
          se totalCobertos = 15 entao
             escreval("A semana esta plenamente coberta.")
          senao
             escreval("A semana NAO esta plenamente coberta.")
          fimse
-         escreval("Turnos com falha por especialidade: Clinica Geral=", falhasClinica, ", Pediatria=", falhasPediatria, ", Cirurgia=", falhasCirurgia)
+         escreval("Falhas por especialidade (turnos abaixo do minimo):")
+         escreval("  Clinica Geral: ", falhasClinica, " | Pediatria: ", falhasPediatria, " | Cirurgia: ", falhasCirurgia)
       fimse
 
-      se (opcao = 10) ou (opcao = 11) entao
-         se opcao = 10 entao
-            escreval("")
-            escreval("--- INDICADORES GERENCIAIS DA SEMANA ---")
-         senao
-            escreval("")
-            escreval("========== RELATORIO TEXTUAL DA SEMANA ==========")
-         fimse
+      se opcao = 9 entao
+         escreval("")
+         escreval("+=========== INDICADORES E RELATORIO SEMANAL =============+")
 
          totalCobertos <- 0
          falhasClinica <- 0
@@ -724,16 +686,20 @@ inicio
             media <- totalPlantoes / quantidade
          fimse
 
-         escreval("Turnos plenamente cobertos: ", totalCobertos, " de 15; percentual: ", (totalCobertos * 100) / 15, "%")
+         escreval("------------------------------------------------------------")
+         escreval("COBERTURA: ", totalCobertos, "/15 turnos completos | ", (totalCobertos * 100) / 15, "%")
          se totalCobertos = 15 entao
             escreval("Situacao da semana: PLENAMENTE COBERTA")
          senao
             escreval("Situacao da semana: NAO PLENAMENTE COBERTA")
          fimse
-         escreval("Falhas por especialidade (turnos abaixo do minimo): Clinica Geral=", falhasClinica, ", Pediatria=", falhasPediatria, ", Cirurgia=", falhasCirurgia)
+         escreval("FALHAS POR ESPECIALIDADE (turnos abaixo do minimo)")
+         escreval("  Clinica Geral: ", falhasClinica, " | Pediatria: ", falhasPediatria, " | Cirurgia: ", falhasCirurgia)
 
          se quantidade > 0 entao
-            escreval("Carga semanal de cada profissional:")
+            escreval("")
+            escreval("CARGA SEMANAL POR PROFISSIONAL")
+            escreval("------------------------------------------------------------")
             para i de 1 ate quantidade faca
                carga <- 0
                para d de 1 ate 5 faca
@@ -744,7 +710,8 @@ inicio
                fimpara
                escreval("- ", nome[i], " | CRM: ", crm[i], " | ", carga, " plantao(oes)")
             fimpara
-            escreval("Maior carga: ", maiorCarga, " plantao(oes); profissional(is):")
+            escreval("")
+            escreval("MAIOR CARGA: ", maiorCarga, " plantao(s)")
             para i de 1 ate quantidade faca
                carga <- 0
                para d de 1 ate 5 faca
@@ -757,7 +724,8 @@ inicio
                   escreval("- ", nome[i], " | CRM: ", crm[i])
                fimse
             fimpara
-            escreval("Menor carga: ", menorCarga, " plantao(oes); profissional(is):")
+            escreval("")
+            escreval("MENOR CARGA: ", menorCarga, " plantao(s)")
             para i de 1 ate quantidade faca
                carga <- 0
                para d de 1 ate 5 faca
@@ -770,8 +738,10 @@ inicio
                   escreval("- ", nome[i], " | CRM: ", crm[i])
                fimse
             fimpara
-            escreval("Media de plantoes por profissional: ", media)
-            escreval("Profissionais sobrecarregados (carga superior a media + 1):")
+            escreval("")
+            escreval("MEDIA DA EQUIPE: ", media, " plantao(s) por profissional")
+            escreval("")
+            escreval("SOBRECARGA (mais de 1 plantao acima da media):")
             totalTurno <- 0
             para i de 1 ate quantidade faca
                carga <- 0
@@ -796,18 +766,18 @@ inicio
          se totalPlantoes = 0 entao
             escreval("Ainda nao ha escalacoes registradas na semana.")
          fimse
-         se opcao = 11 entao
-            escreval("=================================================")
-         fimse
       fimse
 
-      se opcao = 12 entao
+      se opcao = 10 entao
          escreval("")
-         escreval("Os dados nao ficam guardados entre execucoes. Anote as informacoes antes de sair.")
+         escreval("+----------------------------------------------------------+")
+         escreval("| ATENCAO: os dados desta execucao nao ficam salvos.       |")
+         escreval("| Confira/anote as informacoes antes de encerrar.          |")
+         escreval("+----------------------------------------------------------+")
          escreva("Deseja realmente encerrar? (1=Sim, 0=Nao): ")
          leia(confirmacao)
          enquanto (confirmacao <> 0) e (confirmacao <> 1) faca
-            escreval("Resposta invalida. Digite 1 para confirmar ou 0 para voltar ao menu.")
+            escreval("[ERRO] Resposta invalida. Digite 1 para confirmar ou 0 para voltar ao menu.")
             escreva("Deseja encerrar? ")
             leia(confirmacao)
          fimenquanto
@@ -819,8 +789,16 @@ inicio
          fimse
       fimse
 
-      se (opcao < 1) ou (opcao > 12) entao
-         escreval("Opcao invalida. Digite um numero de 1 a 12.")
+      se (opcao < 1) ou (opcao > 10) entao
+         escreval("[ERRO] Opcao invalida. Digite um numero de 1 a 10.")
+      fimse
+
+      se encerrar = falso entao
+         escreval("")
+         escreval("+----------------------------------------------------------+")
+         escreval("| Pressione ENTER para voltar ao menu principal            |")
+         escreval("+----------------------------------------------------------+")
+         leia(resposta)
       fimse
    ate encerrar
 
